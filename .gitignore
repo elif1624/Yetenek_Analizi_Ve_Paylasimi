@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Sensitive Configuration Files
+config/client_secrets.json
+config/youtube_credentials.json
+*.credentials.json
+*.secrets.json
+
+# Data files
+data/input/*.mp4
+data/input/*.avi
+data/input/*.mov
+data/input/*.mkv
+data/input/*.webm
+data/output/*.mp4
+data/output/*.avi
+data/results/*.mp4
+data/results/*.csv
+!data/results/*.json
+!data/results/metrics_visualization/
+
+# Web uploads and clips
+web/static/uploads/*
+web/clips/*
+!web/static/uploads/.gitkeep
+!web/clips/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Model files (optional - uncomment if you want to exclude large model files)
+# data/models/*.pkl
+# data/models/*.h5
+# data/models/*.pth
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup

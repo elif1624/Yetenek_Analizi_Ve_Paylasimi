@@ -1,0 +1,200 @@
+{
+  "video_path": "data\\input\\nba_test_video.mp4",
+  "video_info": {
+    "fps": 29.97002997002997,
+    "frame_count": 2399,
+    "duration": 80.04663333333333,
+    "width": 1920,
+    "height": 1080
+  },
+  "labels": [
+    {
+      "event_type": "pas",
+      "start_time": 4.671333333333333,
+      "end_time": 5.6723333333333334,
+      "start_frame": 140,
+      "end_frame": 170,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 5.739066666666667,
+      "end_time": 6.239566666666667,
+      "start_frame": 172,
+      "end_frame": 187,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 6.2062,
+      "end_time": 7.6076,
+      "start_frame": 186,
+      "end_frame": 228,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "pas",
+      "start_time": 9.6096,
+      "end_time": 10.543866666666666,
+      "start_frame": 288,
+      "end_frame": 316,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 11.144466666666666,
+      "end_time": 12.345666666666666,
+      "start_frame": 334,
+      "end_frame": 370,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 12.846166666666667,
+      "end_time": 14.881533333333334,
+      "start_frame": 385,
+      "end_frame": 446,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "pas",
+      "start_time": 19.052366666666668,
+      "end_time": 20.086733333333335,
+      "start_frame": 571,
+      "end_frame": 602,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 20.186833333333333,
+      "end_time": 22.389033333333334,
+      "start_frame": 605,
+      "end_frame": 671,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 27.2272,
+      "end_time": 29.3293,
+      "start_frame": 816,
+      "end_frame": 879,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "pas",
+      "start_time": 34.9349,
+      "end_time": 36.169466666666665,
+      "start_frame": 1047,
+      "end_frame": 1084,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "pas",
+      "start_time": 49.215833333333336,
+      "end_time": 50.650600000000004,
+      "start_frame": 1475,
+      "end_frame": 1518,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 50.717333333333336,
+      "end_time": 52.519133333333336,
+      "start_frame": 1520,
+      "end_frame": 1574,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "pas",
+      "start_time": 54.52113333333333,
+      "end_time": 55.989266666666666,
+      "start_frame": 1634,
+      "end_frame": 1678,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 56.056000000000004,
+      "end_time": 57.724333333333334,
+      "start_frame": 1680,
+      "end_frame": 1730,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 63.4634,
+      "end_time": 64.63123333333334,
+      "start_frame": 1902,
+      "end_frame": 1937,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 67.03363333333334,
+      "end_time": 68.03463333333333,
+      "start_frame": 2009,
+      "end_frame": 2039,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    },
+    {
+      "event_type": "basket",
+      "start_time": 69.80306666666667,
+      "end_time": 72.13873333333333,
+      "start_frame": 2092,
+      "end_frame": 2162,
+      "player_track_id": null,
+      "confidence": 1.0,
+      "notes": null,
+      "position": null
+    }
+  ],
+  "created_at": "2025-12-24T15:54:21.779923"
+}

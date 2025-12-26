@@ -1,0 +1,3 @@
+"""Konfigürasyon modülü"""
+
+

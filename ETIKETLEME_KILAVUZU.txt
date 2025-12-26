@@ -1,0 +1,72 @@
+===========================================
+ETIKETLEME ARACI KULLANIM KILAVUZU
+===========================================
+
+VIDEO KONTROL TUŞLARI:
+----------------------
+SPACE (Boşluk)    : Video oynatma/durdurma
+← (Sol Ok)        : Önceki frame'e git
+→ (Sağ Ok)        : Sonraki frame'e git
+A                  : 10 frame geri git
+D                  : 10 frame ileri git
+
+ETIKETLEME TUŞLARI:
+-------------------
+B                 : BASKET (Gol) etiketlemeye başla
+P                 : PAS etiketlemeye başla
+ENTER             : Etiketlemeyi bitir ve kaydet
+
+DÜZELTME TUŞLARI:
+-----------------
+DELETE/BACKSPACE  : Son etiketi sil
+X                 : Mevcut frame'deki TÜM etiketleri sil
+L                 : Tüm etiketlerin listesini göster
+
+GENEL:
+------
+Q veya ESC        : Çıkış (etiketler otomatik kaydedilir)
+
+===========================================
+NASIL ETIKETLENIR:
+===========================================
+
+1. Video'yu oynatın veya ok tuşlarıyla ilerleyin
+
+2. Bir olayın başlangıcını bulun (örn: basket atışı başlıyor)
+
+3. Olay tipine göre tuşa basın:
+   - BASKET için: B tuşu
+   - PAS için: P tuşu
+
+4. Olayın bitişine kadar video'yu izleyin (ok tuşlarıyla ilerleyebilirsiniz)
+
+5. Olay bittiğinde ENTER tuşuna basın
+
+6. Etiket kaydedildi! Ekranda kırmızı arka planla gösterilir.
+
+===========================================
+ÖRNEK KULLANIM:
+===========================================
+
+Basket Etiketleme:
+1. Oyuncu topu atış pozisyonuna getirdiğinde B tuşuna bas
+2. Top potaya girene kadar (veya girmeye çalışırken) izle
+3. Atış sonuçlandığında ENTER'a bas
+
+Pas Etiketleme:
+1. Oyuncu pas atmaya başladığında P tuşuna bas
+2. Pas karşı tarafa ulaşana kadar izle
+3. Pas tamamlandığında ENTER'a bas
+
+===========================================
+İPUÇLARI:
+===========================================
+
+- Ekranda mevcut frame'deki etiketler kırmızı arka planla gösterilir
+- L tuşuna basarak tüm etiketleri görebilirsiniz
+- Yanlış etiketi silmek için X tuşunu kullanın (mevcut frame'deki etiketler silinir)
+- DELETE tuşu en son eklediğiniz etiketi siler
+- Etiketleme sırasında ekranda "ETIKETLENIYOR: [OLAY TIPI]" yazısı görünür
+
+===========================================
+
