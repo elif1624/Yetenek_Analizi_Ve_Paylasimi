@@ -1,6 +1,6 @@
 # 🎬 Sosyal Medya API Kurulum Rehberi
 
-YouTube ve Instagram API entegrasyonları için kurulum adımları.
+YouTube ve Facebook API entegrasyonları için kurulum adımları.
 
 ## 📺 YouTube API Kurulumu
 
@@ -60,39 +60,53 @@ Authorization sonrası `config/youtube_credentials.json` dosyası otomatik oluş
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
-## 📸 Instagram API Kurulumu
+## 📘 Facebook API Kurulumu
 
-### 1. Facebook Developer Console Setup
+### 1. Access Token Kullanımı
 
-**NOT:** Instagram Graph API için **Business** veya **Creator** hesabı gerekiyor.
+Facebook Graph API için bir access token gerekir. Access token `web/facebook_uploader.py` dosyasında varsayılan olarak tanımlıdır.
 
-1. [Facebook Developers](https://developers.facebook.com/) üzerinden yeni bir uygulama oluşturun
-2. **Instagram Graph API** ürününü ekleyin
-3. **Instagram Basic Display** veya **Instagram Graph API** seçin
+**Not:** Mevcut access token kodda tanımlıdır. Token süresi dolduğunda yeni bir token almanız gerekebilir.
 
-### 2. Business Hesabı için (Önerilen)
+### 2. Facebook Developer Console (ÖNEMLİ - Token İzni İçin)
 
-1. Bir **Facebook Page** oluşturun
-2. Instagram hesabınızı bu Page'e bağlayın (Instagram > Settings > Account > Linked Accounts)
-3. **Instagram Graph API** > **User Token Generator** ile access token oluşturun
+**EĞER "#100 No permission to publish the video" HATASI ALIYORSANIZ:**
 
-### 3. Environment Variables
+Bu hata, access token'ınızın video yayınlama izni (`publish_video`) olmadığını gösterir. Çözüm:
 
-`.env` dosyasına ekleyin:
+1. [Facebook Graph API Explorer](https://developers.facebook.com/tools/explorer/) sayfasına gidin
+2. Sağ üst köşede uygulamanızı seçin
+3. **Get Token** > **Get User Access Token** butonuna tıklayın
+4. **Permissions** bölümünde şu izinleri seçin:
+   - ✅ `publish_video` (Video yayınlama - ZORUNLU)
+   - ✅ `pages_manage_posts` (Page'e video yükleme için - Page kullanıyorsanız)
+   - ✅ `user_videos` (Kullanıcı videolarına erişim)
+5. **Generate Access Token** butonuna tıklayın
+6. Facebook'tan izin verin
+7. Oluşturulan token'ı kopyalayın
+8. Token'ı `web/facebook_uploader.py` dosyasındaki `FACEBOOK_ACCESS_TOKEN` değişkenine ekleyin
 
-```env
-INSTAGRAM_ACCESS_TOKEN=your_instagram_access_token
-INSTAGRAM_PAGE_ID=your_facebook_page_id
-```
+**NOT:** `publish_video` permission'ı genellikle Facebook tarafından manuel olarak onaylanması gerekebilir. Eğer token oluştururken bu permission görünmüyorsa, Facebook Developer Console'da uygulamanızın ayarlarından bu permission'ı talep etmeniz gerekebilir.
 
-veya `app.py` içinde doğrudan ayarlayabilirsiniz.
+**Alternatif:** Eğer bir Facebook Page'iniz varsa, Page Access Token kullanmak daha kolay olabilir:
+1. [Page Access Token Tool](https://developers.facebook.com/tools/accesstoken/) sayfasına gidin
+2. Page'inizi seçin
+3. Token'ı kopyalayın ve `page_id` parametresini de belirtin
+
+### 3. Page ID (Opsiyonel)
+
+Eğer videoları bir Facebook Page'e yüklemek istiyorsanız:
+
+1. Facebook sayfanızın ID'sini alın
+2. `upload_video_to_facebook` fonksiyonunu çağırırken `page_id` parametresini verin
+3. Belirtilmezse videolar kullanıcının kendi profilinde paylaşılır
 
 ### 4. Video Formatı Gereksinimleri
 
-- Maksimum dosya boyutu: **100MB**
-- Format: MP4, MOV
-- Süre: 3 saniye - 60 saniye (Reels için)
-- En boy oranı: 9:16 (Reels için) veya 1:1 (normal video)
+- Maksimum dosya boyutu: **4GB** (pratikte 100MB'a kadar önerilir)
+- Format: MP4, MOV, AVI, WMV, FLV
+- Süre: En az 1 saniye
+- Çözünürlük: Minimum 720p önerilir
 
 ## 🔧 Klasör Yapısı
 
@@ -103,7 +117,7 @@ project_root/
 │   └── youtube_credentials.json  # OAuth tokens (otomatik oluşturulur)
 └── web/
     ├── youtube_uploader.py
-    └── instagram_uploader.py
+    └── facebook_uploader.py      # Facebook Graph API entegrasyonu
 ```
 
 ## ⚠️ Önemli Notlar
@@ -113,11 +127,11 @@ project_root/
 - Video **unlisted** olarak yüklenir (değiştirilebilir)
 - Video kategorisi: **Sports (17)**
 
-### Instagram
-- Business veya Creator hesabı gerekiyor
-- Facebook Page'e bağlı olmalı
-- Video boyutu limiti: 100MB
-- Reels için 9:16 en-boy oranı önerilir
+### Facebook
+- Access token gerekiyor (kodda varsayılan olarak tanımlı)
+- Page ID belirtilirse videolar Page'e, belirtilmezse kullanıcı profilinde paylaşılır
+- Video boyutu limiti: 4GB (pratikte 100MB'a kadar önerilir)
+- Video formatları: MP4, MOV, AVI, WMV, FLV
 
 ## 🚀 Kullanım
 
@@ -138,17 +152,19 @@ if result['success']:
     print(f"Video yüklendi: {result['video_url']}")
 ```
 
-### Instagram
+### Facebook
 
 ```python
-from web.instagram_uploader import upload_video_to_instagram
+from web.facebook_uploader import upload_video_to_facebook
 
-result = upload_video_to_instagram(
+result = upload_video_to_facebook(
     video_path=Path("clips/video.mp4"),
-    caption="🏀 Basket anı - Basketbol highlights #basketbol"
+    description="🏀 Basket anı - Basketbol highlights #basketbol",
+    page_id=None  # None ise kullanıcı profilinde paylaşılır
 )
 
 if result['success']:
-    print(f"Video paylaşıldı: {result['media_id']}")
+    print(f"Video yüklendi: {result['video_url']}")
+    print(f"Video ID: {result['video_id']}")
 ```
 

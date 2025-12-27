@@ -1,0 +1,26 @@
+ARKA PLAN GÖRSELİ EKLEME TALİMATI
+==================================
+
+1. Basketbol temalı bir görsel bulun veya indirin
+   (Basketbol topunun potadan geçiş anını gösteren görsel)
+
+2. Görseli "basketball-bg.jpg" olarak kaydedin
+
+3. Bu görseli şu klasöre koyun:
+   web/static/img/basketball-bg.jpg
+
+4. Web uygulamasını yeniden başlatın
+
+ÖNERİLEN GÖRSEL ÖZELLİKLERİ:
+- Çözünürlük: 1920x1080 veya daha yüksek
+- Format: JPG (önerilen)
+- Boyut: 1-3 MB arası
+
+GÖRSEL BULABİLECEĞİNİZ KAYNAKLAR:
+- Unsplash: https://unsplash.com/s/photos/basketball-hoop
+- Pexels: https://www.pexels.com/search/basketball/
+- Pixabay: https://pixabay.com/images/search/basketball/
+
+NOT: Görsel eklenmezse sayfa otomatik olarak gradient arka plan kullanacaktır.
+
+

@@ -6,64 +6,222 @@
     <title>Kırpılmış Videolar - Basketbol Video Analizi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
     <style>
         body {
-            background: #f5f5f5;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            background-image: 
+                linear-gradient(135deg, rgba(249, 250, 251, 0.92) 0%, rgba(245, 245, 245, 0.95) 100%),
+                url('{{ url_for("static", filename="img/basketball-bg.jpg") }}');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-attachment: fixed, fixed;
+            background-repeat: no-repeat, no-repeat;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(249, 250, 251, 0.92) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+        .navbar {
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        .navbar-brand {
+            color: #ff6b35 !important;
+            font-weight: 600;
+        }
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-weight: 500;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ff6b35 !important;
         }
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(30, 30, 30, 0.95) 100%);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 30px 0;
             margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         .video-card {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            transition: transform 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.5s;
+        }
+        .video-card:hover::before {
+            left: 100%;
         }
         .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25);
+            border-color: #667eea;
         }
         .video-preview {
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         .btn-share {
             margin: 5px;
+            transition: all 0.3s;
+        }
+        .btn-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .btn-youtube {
             background: #ff0000;
             color: white;
             border: none;
         }
-        .btn-instagram {
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        .btn-youtube:hover {
+            background: #cc0000;
+        }
+        .btn-facebook {
+            background: #1877f2;
             color: white;
             border: none;
         }
+        .btn-facebook:hover {
+            background: #166fe5;
+        }
         .badge-basket {
-            background: #28a745;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
         }
         .badge-pas {
-            background: #007bff;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        .url-copy-input {
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .btn-copy {
+            cursor: pointer;
+        }
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .filter-btn {
+            margin: 5px;
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+        .stats-summary {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .video-card {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-basketball"></i> Basketbol Analizi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Ana Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="header">
         <div class="container">
             <h1><i class="bi bi-scissors"></i> Kırpılmış Videolar</h1>
-            <p class="mb-0">Orijinal Video: <span id="videoName">{{ filename }}</span></p>
+            <p class="mb-0"><i class="bi bi-file-play"></i> Orijinal Video: <span id="videoName">{{ filename }}</span></p>
         </div>
     </div>
 
     <div class="container">
+        <!-- Filtre ve İstatistikler -->
+        <div class="filter-bar">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h5 class="mb-3">Filtrele:</h5>
+                    <button class="btn btn-outline-primary filter-btn active" onclick="filterClips('all')">
+                        <i class="bi bi-funnel"></i> Tümü
+                    </button>
+                    <button class="btn btn-outline-success filter-btn" onclick="filterClips('basket')">
+                        <i class="bi bi-bullseye"></i> Basket
+                    </button>
+                    <button class="btn btn-outline-info filter-btn" onclick="filterClips('pas')">
+                        <i class="bi bi-arrow-left-right"></i> Pas
+                    </button>
+                </div>
+                <div class="stats-summary">
+                    <strong>Toplam:</strong> <span id="totalCount">0</span> video |
+                    <strong>Basket:</strong> <span id="basketCount">0</span> |
+                    <strong>Pas:</strong> <span id="pasCount">0</span>
+                </div>
+            </div>
+        </div>
+
         <div class="row" id="clipsContainer">
             <!-- Kırpılmış videolar buraya eklenecek -->
             <div class="col-12 text-center">
@@ -71,6 +229,34 @@
                     <span class="visually-hidden">Yükleniyor...</span>
                 </div>
                 <p class="mt-3">Kırpılmış videolar yükleniyor...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- URL Kopyalama Modal -->
+    <div class="modal fade" id="urlModal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="urlModalLabel">Video URL</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-2">Video başarıyla yüklendi! URL'yi kopyalamak için:</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control url-copy-input" id="videoUrlInput" readonly value="">
+                        <button class="btn btn-primary btn-copy" type="button" id="copyUrlBtn" onclick="copyUrlToClipboard()">
+                            <i class="bi bi-clipboard"></i> Kopyala
+                        </button>
+                    </div>
+                    <small class="text-muted mt-2 d-block" id="copyStatus"></small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <a href="#" id="openUrlLink" target="_blank" class="btn btn-primary">
+                        <i class="bi bi-box-arrow-up-right"></i> Videoyu Aç
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -90,7 +276,9 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        displayClips(data.clips);
+                        allClips = data.clips;
+                        updateStats(allClips);
+                        renderClips(data.clips);
                     } else {
                         document.getElementById('clipsContainer').innerHTML = 
                             '<div class="col-12 text-center"><p class="text-danger">Kırpılmış video bulunamadı veya hata oluştu.</p></div>';
@@ -103,14 +291,42 @@
                 });
         }
 
-        function displayClips(clips) {
+        let allClips = [];
+        let currentFilter = 'all';
+
+        function filterClips(type) {
+            currentFilter = type;
+            // Aktif butonu güncelle
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const filtered = type === 'all' 
+                ? allClips 
+                : allClips.filter(clip => clip.type === type);
+            
+            renderClips(filtered);
+        }
+
+        function updateStats(clips) {
+            const basketCount = clips.filter(c => c.type === 'basket').length;
+            const pasCount = clips.filter(c => c.type === 'pas').length;
+            
+            document.getElementById('totalCount').textContent = clips.length;
+            document.getElementById('basketCount').textContent = basketCount;
+            document.getElementById('pasCount').textContent = pasCount;
+        }
+
+        function renderClips(clips) {
             const container = document.getElementById('clipsContainer');
             container.innerHTML = '';
 
             if (clips.length === 0) {
                 container.innerHTML = `
-                    <div class="col-12 text-center">
-                        <p class="text-muted">Henüz kırpılmış video yok.</p>
+                    <div class="col-12 text-center p-5">
+                        <i class="bi bi-inbox" style="font-size: 4rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">Gösterilecek video bulunamadı.</p>
                     </div>
                 `;
                 return;
@@ -145,8 +361,8 @@
                             <button class="btn btn-youtube btn-share" onclick="shareToYouTube('${clip.filename}')">
                                 <i class="bi bi-youtube"></i> YouTube'a Yükle
                             </button>
-                            <button class="btn btn-instagram btn-share" onclick="shareToInstagram('${clip.filename}')">
-                                <i class="bi bi-instagram"></i> Instagram'a Paylaş
+                            <button class="btn btn-facebook btn-share" onclick="shareToFacebook('${clip.filename}')">
+                                <i class="bi bi-facebook"></i> Facebook'a Paylaş
                             </button>
                         </div>
                     </div>
@@ -181,9 +397,12 @@
                 button.innerHTML = originalText;
                 
                 if (data.success) {
-                    alert('Video başarıyla YouTube\'a yüklendi!\n\nVideo URL: ' + data.video_url);
-                    // Yeni sekmede aç
-                    window.open(data.video_url, '_blank');
+                    // URL'yi modal'da göster
+                    if (data.video_url) {
+                        showUrlModal(data.video_url, 'YouTube');
+                    } else {
+                        alert('Video başarıyla YouTube\'a yüklendi!');
+                    }
                 } else {
                     alert('YouTube yükleme hatası: ' + data.error);
                 }
@@ -196,8 +415,8 @@
             });
         }
 
-        function shareToInstagram(clipFilename) {
-            if (!confirm('Video Instagram\'a paylaşılacak. Devam etmek istiyor musunuz?')) {
+        function shareToFacebook(clipFilename) {
+            if (!confirm('Video Facebook\'a paylaşılacak. Devam etmek istiyor musunuz?')) {
                 return;
             }
             
@@ -205,9 +424,9 @@
             const button = event.target.closest('button');
             const originalText = button.innerHTML;
             button.disabled = true;
-            button.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Paylaşılıyor...';
+            button.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Yükleniyor...';
             
-            fetch('/api/instagram/upload', {
+            fetch('/api/facebook/upload', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -222,17 +441,81 @@
                 button.innerHTML = originalText;
                 
                 if (data.success) {
-                    alert('Video başarıyla Instagram\'a paylaşıldı!\n\nMedia ID: ' + data.media_id);
+                    // URL'yi modal'da göster
+                    if (data.video_url) {
+                        showUrlModal(data.video_url, 'Facebook');
+                    } else {
+                        alert('Video başarıyla Facebook\'a yüklendi!');
+                    }
                 } else {
-                    alert('Instagram paylaşım hatası: ' + data.error);
+                    alert('Facebook yükleme hatası: ' + data.error);
                 }
             })
             .catch(error => {
                 button.disabled = false;
                 button.innerHTML = originalText;
                 console.error('Error:', error);
-                alert('Instagram paylaşım hatası: ' + error.message);
+                alert('Facebook yükleme hatası: ' + error.message);
             });
+        }
+
+        function showUrlModal(url, platform) {
+            // URL'yi input field'a ekle
+            document.getElementById('videoUrlInput').value = url;
+            // Link'i güncelle
+            document.getElementById('openUrlLink').href = url;
+            // Modal başlığını güncelle
+            document.getElementById('urlModalLabel').textContent = platform + ' - Video URL';
+            // Copy status'u temizle
+            document.getElementById('copyStatus').textContent = '';
+            // Modal'ı göster
+            const modal = new bootstrap.Modal(document.getElementById('urlModal'));
+            modal.show();
+        }
+
+        function copyUrlToClipboard() {
+            const urlInput = document.getElementById('videoUrlInput');
+            const copyBtn = document.getElementById('copyUrlBtn');
+            const copyStatus = document.getElementById('copyStatus');
+            
+            // URL'yi seç
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999); // Mobil cihazlar için
+            
+            try {
+                // Clipboard API kullanarak kopyala
+                navigator.clipboard.writeText(urlInput.value).then(() => {
+                    // Başarılı
+                    copyStatus.textContent = '✓ URL panoya kopyalandı!';
+                    copyStatus.className = 'text-success mt-2 d-block';
+                    copyBtn.innerHTML = '<i class="bi bi-check"></i> Kopyalandı!';
+                    copyBtn.classList.add('btn-success');
+                    copyBtn.classList.remove('btn-primary');
+                    
+                    // 2 saniye sonra eski haline döndür
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="bi bi-clipboard"></i> Kopyala';
+                        copyBtn.classList.remove('btn-success');
+                        copyBtn.classList.add('btn-primary');
+                        copyStatus.textContent = '';
+                    }, 2000);
+                }).catch(err => {
+                    // Fallback: execCommand kullan
+                    document.execCommand('copy');
+                    copyStatus.textContent = '✓ URL panoya kopyalandı!';
+                    copyStatus.className = 'text-success mt-2 d-block';
+                });
+            } catch (err) {
+                // Fallback: execCommand kullan
+                try {
+                    document.execCommand('copy');
+                    copyStatus.textContent = '✓ URL panoya kopyalandı!';
+                    copyStatus.className = 'text-success mt-2 d-block';
+                } catch (e) {
+                    copyStatus.textContent = '✗ Kopyalama başarısız oldu. Lütfen URL\'yi manuel olarak kopyalayın.';
+                    copyStatus.className = 'text-danger mt-2 d-block';
+                }
+            }
         }
     </script>
 </body>

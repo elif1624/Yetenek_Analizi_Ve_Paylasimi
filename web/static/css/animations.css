@@ -1,0 +1,210 @@
+/* Basketbol Temalı Animasyonlar ve Profesyonel Tasarım */
+
+/* Basketbol Pota ve Top Animasyonu */
+.basketball-animation {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    height: 150px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0.1;
+}
+
+.basketball-animation-left {
+    left: 20px;
+    right: auto;
+}
+
+.basketball-hoop {
+    position: relative;
+    width: 100px;
+    height: 50px;
+}
+
+.hoop-rim {
+    width: 80px;
+    height: 80px;
+    border: 8px solid #ff6b35;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        0 0 0 4px #1a1a1a,
+        0 0 0 8px #ff6b35,
+        inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.hoop-net {
+    width: 70px;
+    height: 60px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 50% 50%;
+}
+
+.basketball {
+    width: 30px;
+    height: 30px;
+    background: #ff6b35;
+    border-radius: 50%;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: shootBasketball 3s ease-in-out infinite;
+    box-shadow: 
+        0 0 0 2px #1a1a1a,
+        0 0 0 4px #ff6b35,
+        inset -5px -5px 10px rgba(0,0,0,0.3);
+}
+
+.basketball::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #1a1a1a;
+    transform: translateY(-50%);
+}
+
+.basketball::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #1a1a1a;
+    transform: translateX(-50%);
+}
+
+@keyframes shootBasketball {
+    0% {
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%) rotate(0deg);
+        opacity: 1;
+    }
+    30% {
+        top: 30px;
+        left: 48%;
+        transform: translateX(-50%) rotate(180deg);
+        opacity: 1;
+    }
+    50% {
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%) rotate(360deg);
+        opacity: 0.8;
+    }
+    70% {
+        top: 60px;
+        left: 52%;
+        transform: translateX(-50%) rotate(540deg);
+        opacity: 0.6;
+    }
+    100% {
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Floating Basketball Icons */
+.floating-basketball {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: #ff6b35;
+    border-radius: 50%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.05;
+    animation: floatAround 15s ease-in-out infinite;
+    box-shadow: 
+        0 0 0 2px #1a1a1a,
+        inset -3px -3px 8px rgba(0,0,0,0.3);
+}
+
+.floating-basketball::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #1a1a1a;
+    transform: translateY(-50%);
+}
+
+.floating-basketball::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: #1a1a1a;
+    transform: translateX(-50%);
+}
+
+@keyframes floatAround {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, -50px) rotate(90deg);
+    }
+    50% {
+        transform: translate(200px, 50px) rotate(180deg);
+    }
+    75% {
+        transform: translate(100px, 150px) rotate(270deg);
+    }
+}
+
+/* Profesyonel Renk Paleti */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
+    --basketball-orange: #ff6b35;
+    --basketball-dark: #1a1a1a;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-light: #f9fafb;
+    --bg-card: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+

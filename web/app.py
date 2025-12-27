@@ -242,9 +242,9 @@ def api_youtube_upload():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
-@app.route('/api/instagram/upload', methods=['POST'])
-def api_instagram_upload():
-    """Instagram'a video paylaşım API endpoint'i"""
+@app.route('/api/facebook/upload', methods=['POST'])
+def api_facebook_upload():
+    """Facebook'a video yükleme API endpoint'i"""
     data = request.get_json()
     clip_filename = data.get('clip_filename')
     
@@ -256,24 +256,24 @@ def api_instagram_upload():
         return jsonify({'error': 'Video bulunamadı'}), 404
     
     try:
-        from web.instagram_uploader import upload_video_to_instagram
+        from web.facebook_uploader import upload_video_to_facebook
         
         # Video bilgilerini dosya adından çıkar
         parts = Path(clip_filename).stem.split('_')
         event_type = parts[-3] if len(parts) >= 3 else 'basket'
         event_type_label = 'Basket' if event_type == 'basket' else 'Pas'
         
-        caption = f"🏀 {event_type_label} anı - Basketbol highlights\n#basketbol #basketball #highlights"
+        description = f"🏀 {event_type_label} anı - Basketbol highlights\n#basketbol #basketball #highlights"
         
-        result = upload_video_to_instagram(
+        result = upload_video_to_facebook(
             video_path=clip_path,
-            caption=caption
+            description=description
         )
         
         return jsonify(result)
         
     except Exception as e:
-        logger.error(f"Instagram yükleme hatası: {e}", exc_info=True)
+        logger.error(f"Facebook yükleme hatası: {e}", exc_info=True)
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
