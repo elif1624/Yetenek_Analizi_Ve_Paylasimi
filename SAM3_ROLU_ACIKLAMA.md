@@ -185,3 +185,5 @@ ML Model = Öğrenci (pattern öğreniyor)
 
 
 
+
+

@@ -1,11 +1,29 @@
 """
 Web Arayüzü - Flask Uygulaması
-Basketbol video analizi, kırpma ve paylaşım sistemi
+Basketbol video analizi, kırpma ve sosyal medya paylaşım sistemi
+
+Bu modül, kullanıcılara web arayüzü üzerinden basketbol videolarını yükleyip
+analiz etme, tespit edilen olayları (basket, pas) kırpma ve YouTube/Facebook'a
+paylaşma imkanı sağlar.
+
+Ana Özellikler:
+- Video yükleme ve önizleme
+- ML model ile otomatik olay tespiti (basket, pas)
+- Tespit edilen olayları video olarak kırpma
+- Kırpılmış videoları YouTube/Facebook'a yükleme
+- Analiz sonuçlarını cache'leme (hızlı tekrar erişim)
+
+Kullanım:
+    cd web
+    python app.py
+    
+Tarayıcıda: http://localhost:5000
 """
 
 import os
 import json
 import logging
+import threading
 from pathlib import Path
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, send_file, url_for
@@ -36,12 +54,16 @@ CORS(app)
 UPLOAD_FOLDER = web_dir / 'static' / 'uploads'
 CLIPS_FOLDER = web_dir / 'clips'
 RESULTS_FOLDER = web_dir / 'results'
-MODEL_PATH = project_root / 'data' / 'models' / 'event_classifier.pkl'
+ANALYSIS_CACHE_FOLDER = web_dir / 'data' / 'analysis_cache'
+ANALYSIS_PROGRESS_FOLDER = web_dir / 'data' / 'analysis_progress'
+MODEL_PATH = project_root / 'data' / 'models' / 'event_classifier_regularized.pkl'
 
 # Klasörleri oluştur
 UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
 CLIPS_FOLDER.mkdir(parents=True, exist_ok=True)
 RESULTS_FOLDER.mkdir(parents=True, exist_ok=True)
+ANALYSIS_CACHE_FOLDER.mkdir(parents=True, exist_ok=True)
+ANALYSIS_PROGRESS_FOLDER.mkdir(parents=True, exist_ok=True)
 
 # İzin verilen dosya uzantıları
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv', 'webm'}
@@ -71,7 +93,17 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_video():
-    """Video yükleme"""
+    """
+    Video yükleme endpoint'i
+    
+    GET: Yükleme sayfasını gösterir
+    POST: Video dosyasını alır, kaydeder ve analiz sayfasına yönlendirir
+    
+    Dosya validasyonu:
+    - Sadece belirli formatlar (mp4, avi, mov, mkv, webm)
+    - Maksimum 500MB
+    - Dosya adı timestamp ile güvenli hale getirilir
+    """
     if request.method == 'GET':
         return render_template('upload.html')
     
@@ -112,9 +144,76 @@ def analyze_video(filename):
     return render_template('analyze.html', filename=filename)
 
 
+def update_progress(filename: str, progress: int, message: str):
+    """
+    Analiz ilerleme durumunu JSON dosyasına kaydeder
+    
+    Frontend tarafında polling ile bu dosya okunarak progress bar güncellenir.
+    Progress 0-100 arası değer alır, -1 ise hata durumunu gösterir.
+    """
+    progress_file = ANALYSIS_PROGRESS_FOLDER / f"{filename}_progress.json"
+    try:
+        with open(progress_file, 'w', encoding='utf-8') as f:
+            json.dump({
+                'progress': progress,
+                'message': message,
+                'timestamp': datetime.now().isoformat()
+            }, f)
+    except Exception as e:
+        logger.warning(f"Progress kaydetme hatası: {e}")
+
+
+def analyze_video_in_background(filename: str, filepath: Path, cache_filepath: Path):
+    """
+    Arka planda video analizini thread içinde çalıştırır
+    
+    Uzun süren analiz işlemi için ayrı thread kullanılır, böylece Flask
+    uygulaması bloke olmaz. İlerleme durumu JSON dosyasına yazılır ve
+    sonuçlar cache'e kaydedilir.
+    """
+    try:
+        update_progress(filename, 5, "Video analizi başlatılıyor...")
+        
+        from web.video_analyzer import get_video_analysis_events_simple
+        
+        # İlerleme callback'i ile analiz yap
+        def progress_callback(step: str, progress: int, message: str):
+            update_progress(filename, progress, message)
+        
+        events = get_video_analysis_events_simple(
+            filepath, MODEL_PATH, progress_callback
+        )
+        
+        # Sonuçları cache'e kaydet
+        update_progress(filename, 95, "Sonuçlar kaydediliyor...")
+        cache_data = {
+            'filename': filename,
+            'timestamp': datetime.now().isoformat(),
+            'events': events
+        }
+        with open(cache_filepath, 'w', encoding='utf-8') as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+        
+        update_progress(filename, 100, "Analiz tamamlandı!")
+        logger.info(f"Analiz sonuçları cache'e kaydedildi: {cache_filepath}")
+        
+    except Exception as e:
+        logger.error(f"Arka plan analiz hatası: {e}", exc_info=True)
+        update_progress(filename, -1, f"Hata: {str(e)}")
+
+
 @app.route('/api/analyze', methods=['POST'])
 def api_analyze_video():
-    """Video analizi API endpoint'i"""
+    """
+    Video analizi API endpoint'i - Cache mekanizması ile
+    
+    İş Akışı:
+    1. Cache kontrolü: Eğer daha önce analiz yapıldıysa cache'den döndür
+    2. Progress kontrolü: Analiz devam ediyorsa progress bilgisi döndür
+    3. Yeni analiz: Cache yoksa arka planda analiz başlat
+    
+    Cache sayesinde aynı video tekrar analiz edilmez, performans artar.
+    """
     data = request.get_json()
     filename = data.get('filename')
     
@@ -125,19 +224,104 @@ def api_analyze_video():
     if not filepath.exists():
         return jsonify({'error': 'Video bulunamadı'}), 404
     
+    # Cache dosya yolu
+    cache_filename = f"{filename}_events.json"
+    cache_filepath = ANALYSIS_CACHE_FOLDER / cache_filename
+    
+    # Cache kontrolü - eğer analiz daha önce yapıldıysa cache'den döndür
+    if cache_filepath.exists():
+        try:
+            logger.info(f"Analiz cache'den yükleniyor: {cache_filepath}")
+            with open(cache_filepath, 'r', encoding='utf-8') as f:
+                cached_data = json.load(f)
+                return jsonify({
+                    'success': True,
+                    'events': cached_data.get('events', []),
+                    'cached': True
+                })
+        except Exception as e:
+            logger.warning(f"Cache okuma hatası, yeniden analiz yapılacak: {e}")
+    
+    # Progress dosyası kontrolü - analiz devam ediyorsa
+    progress_file = ANALYSIS_PROGRESS_FOLDER / f"{filename}_progress.json"
+    if progress_file.exists():
+        try:
+            with open(progress_file, 'r', encoding='utf-8') as f:
+                progress_data = json.load(f)
+                if progress_data.get('progress', 0) < 100:
+                    return jsonify({
+                        'success': False,
+                        'in_progress': True,
+                        'progress': progress_data.get('progress', 0),
+                        'message': progress_data.get('message', 'Analiz devam ediyor...')
+                    })
+        except Exception:
+            pass
+    
+    # Cache yoksa ve analiz başlamamışsa arka planda başlat
     try:
-        # Video analizi
-        from web.video_analyzer import get_video_analysis_events_simple
-        
-        events = get_video_analysis_events_simple(filepath, MODEL_PATH)
+        logger.info(f"Yeni analiz başlatılıyor (arka plan): {filepath}")
+        thread = threading.Thread(
+            target=analyze_video_in_background,
+            args=(filename, filepath, cache_filepath),
+            daemon=True
+        )
+        thread.start()
         
         return jsonify({
-            'success': True,
-            'events': events
+            'success': False,
+            'in_progress': True,
+            'progress': 0,
+            'message': 'Analiz başlatılıyor...'
         })
     except Exception as e:
-        logger.error(f"Analiz hatası: {e}", exc_info=True)
+        logger.error(f"Analiz başlatma hatası: {e}", exc_info=True)
         return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/analyze/progress/<filename>', methods=['GET'])
+def api_get_analyze_progress(filename):
+    """Analiz ilerleme durumunu döndür"""
+    progress_file = ANALYSIS_PROGRESS_FOLDER / f"{filename}_progress.json"
+    
+    if not progress_file.exists():
+        return jsonify({
+            'in_progress': False,
+            'progress': 0,
+            'message': 'Analiz başlamadı'
+        })
+    
+    try:
+        with open(progress_file, 'r', encoding='utf-8') as f:
+            progress_data = json.load(f)
+            progress = progress_data.get('progress', 0)
+            
+            # Analiz tamamlandıysa cache'den sonuçları kontrol et
+            if progress >= 100:
+                cache_file = ANALYSIS_CACHE_FOLDER / f"{filename}_events.json"
+                if cache_file.exists():
+                    with open(cache_file, 'r', encoding='utf-8') as cf:
+                        cached_data = json.load(cf)
+                        return jsonify({
+                            'success': True,
+                            'in_progress': False,
+                            'progress': 100,
+                            'message': 'Analiz tamamlandı',
+                            'events': cached_data.get('events', [])
+                        })
+            
+            return jsonify({
+                'in_progress': True,
+                'progress': progress,
+                'message': progress_data.get('message', 'Analiz devam ediyor...')
+            })
+    except Exception as e:
+        logger.error(f"Progress okuma hatası: {e}")
+        return jsonify({
+            'in_progress': False,
+            'progress': 0,
+            'message': 'Hata oluştu'
+        }), 500
 
 
 @app.route('/api/clip', methods=['POST'])
@@ -173,6 +357,70 @@ def api_clip_video():
         })
     except Exception as e:
         logger.error(f"Kırpma hatası: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/clip/all', methods=['POST'])
+def api_clip_all_events():
+    """Tüm olayları kırpma API endpoint'i"""
+    data = request.get_json()
+    filename = data.get('filename')
+    events = data.get('events', [])
+    
+    if not filename:
+        return jsonify({'error': 'Filename gerekli'}), 400
+    
+    if not events:
+        return jsonify({'error': 'Olay listesi boş'}), 400
+    
+    filepath = UPLOAD_FOLDER / filename
+    if not filepath.exists():
+        return jsonify({'error': 'Video bulunamadı'}), 404
+    
+    try:
+        from web.video_clipper import clip_video, create_clip_filename
+        
+        clipped_files = []
+        
+        for i, event in enumerate(events):
+            start_time = event.get('start_time')
+            end_time = event.get('end_time')
+            event_type = event.get('type', 'event')
+            
+            if start_time is None or end_time is None:
+                logger.warning(f"Olay {i+1} için eksik zaman bilgisi, atlanıyor")
+                continue
+            
+            try:
+                # Çıktı dosya adı oluştur
+                clip_filename = create_clip_filename(filename, event_type, start_time, end_time)
+                output_path = CLIPS_FOLDER / clip_filename
+                
+                # Video kırp
+                clip_video(filepath, start_time, end_time, output_path)
+                
+                clipped_files.append({
+                    'clip_filename': clip_filename,
+                    'event_type': event_type,
+                    'start_time': start_time,
+                    'end_time': end_time,
+                    'download_url': url_for('download_clip', filename=clip_filename)
+                })
+                
+                logger.info(f"Olay {i+1}/{len(events)} kırpıldı: {clip_filename}")
+            except Exception as e:
+                logger.error(f"Olay {i+1} kırpma hatası: {e}")
+                # Hata olsa bile diğer olayları kırpmaya devam et
+                continue
+        
+        return jsonify({
+            'success': True,
+            'total_events': len(events),
+            'clipped_count': len(clipped_files),
+            'clips': clipped_files
+        })
+    except Exception as e:
+        logger.error(f"Toplu kırpma hatası: {e}", exc_info=True)
         return jsonify({'error': str(e)}), 500
 
 

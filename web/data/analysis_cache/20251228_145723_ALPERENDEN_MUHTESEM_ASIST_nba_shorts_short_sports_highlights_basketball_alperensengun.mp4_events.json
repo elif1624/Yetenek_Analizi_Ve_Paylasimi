@@ -1,0 +1,18 @@
+{
+  "filename": "20251228_145723_ALPERENDEN_MUHTESEM_ASIST_nba_shorts_short_sports_highlights_basketball_alperensengun.mp4",
+  "timestamp": "2025-12-28T14:59:32.420973",
+  "events": [
+    {
+      "type": "pas",
+      "start_time": 0.0,
+      "end_time": 2.4000000000000004,
+      "confidence": 0.8440263932855541
+    },
+    {
+      "type": "basket",
+      "start_time": 2.4000000000000004,
+      "end_time": 5.5,
+      "confidence": 0.5016886364643732
+    }
+  ]
+}

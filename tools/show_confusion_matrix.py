@@ -10,6 +10,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 import sys
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Proje root'unu path'e ekle
 project_root = Path(__file__).parent.parent
@@ -17,6 +19,10 @@ sys.path.insert(0, str(project_root))
 
 from src.models.event_classifier import EventClassifier
 from sklearn.metrics import confusion_matrix, classification_report
+
+# Türkçe karakter desteği için matplotlib ayarları
+plt.rcParams['font.family'] = 'DejaVu Sans'
+sns.set_style("whitegrid")
 
 
 def load_model_and_features(model_path: Path, features_path: Path):
@@ -31,14 +37,57 @@ def load_model_and_features(model_path: Path, features_path: Path):
     return classifier, data['features']
 
 
+def create_confusion_matrix_visualization(y_test, y_pred, class_names, output_path=None):
+    """Confusion matrix'i görsel olarak oluştur (fotoğraftaki gibi)"""
+    # Sadece test setinde bulunan sınıfları kullan
+    unique_test_classes = np.unique(np.concatenate([y_test, y_pred]))
+    class_indices = sorted(unique_test_classes.tolist())
+    
+    # Sadece mevcut sınıflar için confusion matrix oluştur
+    cm = confusion_matrix(y_test, y_pred, labels=class_indices)
+    filtered_class_names = [class_names[i] for i in class_indices]
+    
+    # Türkçe sınıf isimleri
+    turkish_names = {'basket': 'Basket', 'pas': 'Pas', 'blok': 'Blok'}
+    display_names = [turkish_names.get(name, name.capitalize()) for name in filtered_class_names]
+    
+    # Figür oluştur
+    plt.figure(figsize=(10, 8))
+    
+    # Heatmap oluştur
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=display_names, yticklabels=display_names,
+                cbar_kws={'label': 'Adet'}, linewidths=1, linecolor='gray')
+    
+    plt.title('Karmaşıklık Matrisi', fontsize=16, fontweight='bold', pad=20)
+    plt.ylabel('Gerçek', fontsize=12, fontweight='bold')
+    plt.xlabel('Tahmin Edilen', fontsize=12, fontweight='bold')
+    plt.tight_layout()
+    
+    # Kaydet veya göster
+    if output_path:
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        print(f"\nGörsel kaydedildi: {output_path}")
+    else:
+        plt.show()
+    
+    plt.close()
+    
+    return cm
+
+
 def create_confusion_matrix_display(y_test, y_pred, class_names):
     """Confusion matrix'i daha okunabilir formatta göster"""
-    cm = confusion_matrix(y_test, y_pred)
+    # Sadece test setinde bulunan sınıfları kullan
+    unique_test_classes = np.unique(np.concatenate([y_test, y_pred]))
+    class_indices = sorted(unique_test_classes.tolist())
+    cm = confusion_matrix(y_test, y_pred, labels=class_indices)
+    filtered_class_names = [class_names[i] for i in class_indices]
     
     # DataFrame olarak oluştur
     cm_df = pd.DataFrame(cm, 
-                        index=[f'Gerçek: {name}' for name in class_names],
-                        columns=[f'Tahmin: {name}' for name in class_names])
+                        index=[f'Gerçek: {name}' for name in filtered_class_names],
+                        columns=[f'Tahmin: {name}' for name in filtered_class_names])
     
     print("\n" + "="*70)
     print("CONFUSION MATRIX (Karışıklık Matrisi)")
@@ -65,7 +114,7 @@ def create_confusion_matrix_display(y_test, y_pred, class_names):
     print()
     
     # Her sınıf için detay
-    for i, class_name in enumerate(class_names):
+    for i, class_name in enumerate(filtered_class_names):
         total_class = cm[i, :].sum()
         correct_class = cm[i, i]
         incorrect_class = total_class - correct_class
@@ -78,7 +127,7 @@ def create_confusion_matrix_display(y_test, y_pred, class_names):
             print(f"  [X] Yanlis tahmin: {incorrect_class}")
             
             # Hangi sınıfa yanlış tahmin edilmiş?
-            for j, other_class in enumerate(class_names):
+            for j, other_class in enumerate(filtered_class_names):
                 if i != j and cm[i, j] > 0:
                     print(f"    -> {cm[i, j]} ornek '{other_class}' olarak yanlis tahmin edilmis")
             print()
@@ -109,6 +158,17 @@ def main():
         type=int,
         default=42,
         help='Random state (model eğitimindeki ile aynı olmalı)'
+    )
+    parser.add_argument(
+        '--output',
+        type=str,
+        default=None,
+        help='Görsel çıktı dosyası yolu (örn: confusion_matrix.png)'
+    )
+    parser.add_argument(
+        '--no-display',
+        action='store_true',
+        help='Sadece görsel oluştur, konsola yazdırma'
     )
     
     args = parser.parse_args()
@@ -162,21 +222,38 @@ def main():
     y_test = np.array(y_test)
     y_pred = np.array(y_pred)
     
-    # Gerçek sınıf isimlerini al
-    unique_classes = np.unique(np.concatenate([y_test, y_pred]))
-    class_names = [classifier.idx_to_class[idx] for idx in unique_classes]
+    # Gerçek sınıf isimlerini al (tüm sınıfları dahil et)
+    all_class_indices = sorted(classifier.class_to_idx.values())
+    class_names = [classifier.idx_to_class[idx] for idx in all_class_indices]
     
-    # Confusion matrix göster
-    create_confusion_matrix_display(y_test, y_pred, class_names)
+    # Confusion matrix görselini oluştur
+    output_path = args.output
+    if not output_path:
+        # Varsayılan çıktı yolu
+        output_dir = Path("data/results/metrics_visualization")
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_path = output_dir / "confusion_matrix.png"
     
-    # Classification report
-    print("\n" + "="*70)
-    print("CLASSIFICATION REPORT")
-    print("="*70)
-    print(classification_report(y_test, y_pred, 
-                              labels=unique_classes,
-                              target_names=class_names, 
-                              zero_division=0))
+    print("\nGörsel confusion matrix oluşturuluyor...")
+    cm = create_confusion_matrix_visualization(y_test, y_pred, class_names, str(output_path))
+    
+    if not args.no_display:
+        # Konsola yazdır
+        create_confusion_matrix_display(y_test, y_pred, class_names)
+        
+        # Classification report
+        print("\n" + "="*70)
+        print("CLASSIFICATION REPORT")
+        print("="*70)
+        # Sadece test setinde bulunan sınıflar için report
+        unique_test_classes = np.unique(np.concatenate([y_test, y_pred]))
+        report_class_indices = sorted(unique_test_classes.tolist())
+        report_class_names = [class_names[i] for i in report_class_indices]
+        
+        print(classification_report(y_test, y_pred, 
+                                  labels=report_class_indices,
+                                  target_names=report_class_names, 
+                                  zero_division=0))
     
     return 0
 

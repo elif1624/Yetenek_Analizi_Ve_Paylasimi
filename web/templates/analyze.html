@@ -241,7 +241,7 @@
         <div class="events-container" id="eventsContainer" style="display: none;">
             <h4><i class="bi bi-list-check"></i> Tespit Edilen Olaylar</h4>
             <div id="eventsList"></div>
-            <div class="text-center mt-4">
+            <div class="text-center mt-4" id="clipAllContainer" style="display: none;">
                 <button class="btn btn-primary btn-lg btn-clip" id="clipAllBtn">
                     <i class="bi bi-scissors"></i> Tümünü Kırp
                 </button>
@@ -259,14 +259,19 @@
             startAnalysis();
         });
 
+        let progressInterval = null;
+
         function startAnalysis() {
             const progressContainer = document.getElementById('progressContainer');
             const eventsContainer = document.getElementById('eventsContainer');
             const analysisProgress = document.getElementById('analysisProgress');
             const progressText = document.getElementById('progressText');
 
+            // Progress bar'ı göster
             progressContainer.style.display = 'block';
             eventsContainer.style.display = 'none';
+            analysisProgress.style.width = '0%';
+            progressText.textContent = 'Hazırlanıyor...';
 
             // Analiz API çağrısı
             fetch('/api/analyze', {
@@ -278,21 +283,88 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    events = data.events;
+                if (data.success && data.cached) {
+                    // Cache'den geldi, direkt göster
                     progressContainer.style.display = 'none';
+                    events = data.events;
+                    displayEvents(events);
+                } else if (data.in_progress) {
+                    // Analiz devam ediyor, polling başlat
+                    updateProgressBar(data.progress, data.message, analysisProgress, progressText);
+                    startProgressPolling(analysisProgress, progressText);
+                } else if (data.success) {
+                    // Analiz tamamlandı
+                    progressContainer.style.display = 'none';
+                    events = data.events;
                     displayEvents(events);
                 } else {
-                    alert('Analiz hatası: ' + data.error);
+                    progressContainer.style.display = 'none';
+                    alert('Analiz hatası: ' + (data.error || data.message || 'Bilinmeyen hata'));
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                progressContainer.style.display = 'none';
                 alert('Analiz hatası: ' + error.message);
             });
+        }
 
-            // İlerleme simülasyonu (gerçek implementasyonda WebSocket veya polling kullanılabilir)
-            simulateProgress(analysisProgress, progressText);
+        function startProgressPolling(progressBar, progressText) {
+            // Mevcut interval'i temizle
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            // Her 500ms'de bir ilerlemeyi kontrol et
+            progressInterval = setInterval(() => {
+                fetch(`/api/analyze/progress/${encodeURIComponent(filename)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success && data.events) {
+                            // Analiz tamamlandı
+                            clearInterval(progressInterval);
+                            progressInterval = null;
+                            document.getElementById('progressContainer').style.display = 'none';
+                            events = data.events;
+                            displayEvents(events);
+                        } else if (data.in_progress) {
+                            // İlerleme güncelle
+                            updateProgressBar(data.progress, data.message, progressBar, progressText);
+                        } else if (data.progress >= 100) {
+                            // Tamamlandı ama events yok, cache'den kontrol et
+                            clearInterval(progressInterval);
+                            progressInterval = null;
+                            // Bir kez daha /api/analyze çağır
+                            setTimeout(() => {
+                                fetch('/api/analyze', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ filename: filename })
+                                })
+                                .then(r => r.json())
+                                .then(d => {
+                                    if (d.success) {
+                                        document.getElementById('progressContainer').style.display = 'none';
+                                        events = d.events;
+                                        displayEvents(events);
+                                    }
+                                });
+                            }, 1000);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Progress polling error:', error);
+                    });
+            }, 500);
+        }
+
+        function updateProgressBar(progress, message, progressBar, progressText) {
+            if (progressBar) {
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            }
+            if (progressText) {
+                progressText.textContent = message || `Analiz devam ediyor... ${progress}%`;
+            }
         }
 
         function simulateProgress(progressBar, progressText) {
@@ -324,6 +396,7 @@
             
             eventsContainer.style.display = 'block';
             statsBar.style.display = 'flex';
+            const clipAllContainer = document.getElementById('clipAllContainer');
             eventsList.innerHTML = '';
 
             // İstatistikleri güncelle
@@ -340,7 +413,15 @@
 
             if (events.length === 0) {
                 eventsList.innerHTML = '<div class="text-center text-muted p-5"><i class="bi bi-inbox" style="font-size: 3rem;"></i><p class="mt-3">Tespit edilen olay bulunamadı.</p></div>';
+                if (clipAllContainer) {
+                    clipAllContainer.style.display = 'none';
+                }
                 return;
+            }
+
+            // Olaylar varsa "Tümünü Kırp" butonunu göster
+            if (clipAllContainer) {
+                clipAllContainer.style.display = 'block';
             }
 
             events.forEach((event, index) => {
@@ -410,10 +491,42 @@
         }
 
         document.getElementById('clipAllBtn').addEventListener('click', () => {
-            if (confirm('Tüm olayları kırpmak istediğinizden emin misiniz?')) {
-                // Tüm olayları sırayla kırp
-                events.forEach((event, index) => {
-                    setTimeout(() => clipVideo(event), index * 1000);
+            if (events.length === 0) {
+                alert('Kırpılacak olay bulunamadı!');
+                return;
+            }
+            
+            if (confirm(`${events.length} olayı kırpmak istediğinizden emin misiniz?`)) {
+                clipAllBtn.disabled = true;
+                clipAllBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Kırpılıyor...';
+                
+                // Tüm olayları tek seferde kırp
+                fetch('/api/clip/all', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        filename: filename,
+                        events: events
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`${data.clipped_count} olay başarıyla kırpıldı! Sonuçlar sayfasına yönlendiriliyorsunuz...`);
+                        window.location.href = '/results/' + filename;
+                    } else {
+                        clipAllBtn.disabled = false;
+                        clipAllBtn.innerHTML = '<i class="bi bi-scissors"></i> Tümünü Kırp';
+                        alert('Kırpma hatası: ' + (data.error || 'Bilinmeyen hata'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    clipAllBtn.disabled = false;
+                    clipAllBtn.innerHTML = '<i class="bi bi-scissors"></i> Tümünü Kırp';
+                    alert('Kırpma hatası: ' + error.message);
                 });
             }
         });

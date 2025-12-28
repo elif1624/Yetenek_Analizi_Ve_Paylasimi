@@ -1,0 +1,4256 @@
+{
+  "video_path": "data\\input\\clips\\pass_clips\\pass_010.mp4",
+  "video_metadata": {
+    "fps": 29.97,
+    "frame_count": 47,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.5682349015682349
+  },
+  "analysis_params": {
+    "text_prompt": "basketball player",
+    "conf_threshold": 0.25,
+    "extraction_fps": 10.0,
+    "max_frames": null,
+    "tracking_enabled": true,
+    "jersey_recognition_enabled": false,
+    "event_detection_enabled": false
+  },
+  "statistics": {
+    "total_frames_processed": 24,
+    "frames_with_detections": 24,
+    "total_detections": 117,
+    "unique_tracks": 27,
+    "long_tracks": 1,
+    "avg_track_length": 4.333333333333333,
+    "total_events_detected": 0
+  },
+  "track_statistics": {
+    "1": {
+      "total_frames": 24,
+      "first_frame": 0,
+      "last_frame": 23,
+      "duration_frames": 23,
+      "duration_seconds": 2.3,
+      "jersey_number": null
+    },
+    "2": {
+      "total_frames": 12,
+      "first_frame": 0,
+      "last_frame": 11,
+      "duration_frames": 11,
+      "duration_seconds": 1.1,
+      "jersey_number": null
+    },
+    "3": {
+      "total_frames": 10,
+      "first_frame": 0,
+      "last_frame": 9,
+      "duration_frames": 9,
+      "duration_seconds": 0.9,
+      "jersey_number": null
+    },
+    "4": {
+      "total_frames": 11,
+      "first_frame": 0,
+      "last_frame": 10,
+      "duration_frames": 10,
+      "duration_seconds": 1.0,
+      "jersey_number": null
+    },
+    "5": {
+      "total_frames": 13,
+      "first_frame": 0,
+      "last_frame": 13,
+      "duration_frames": 13,
+      "duration_seconds": 1.3,
+      "jersey_number": null
+    },
+    "6": {
+      "total_frames": 2,
+      "first_frame": 2,
+      "last_frame": 11,
+      "duration_frames": 9,
+      "duration_seconds": 0.9,
+      "jersey_number": null
+    },
+    "7": {
+      "total_frames": 2,
+      "first_frame": 8,
+      "last_frame": 9,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "8": {
+      "total_frames": 1,
+      "first_frame": 10,
+      "last_frame": 10,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "9": {
+      "total_frames": 1,
+      "first_frame": 10,
+      "last_frame": 10,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "10": {
+      "total_frames": 2,
+      "first_frame": 10,
+      "last_frame": 11,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "11": {
+      "total_frames": 2,
+      "first_frame": 11,
+      "last_frame": 12,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "12": {
+      "total_frames": 2,
+      "first_frame": 12,
+      "last_frame": 14,
+      "duration_frames": 2,
+      "duration_seconds": 0.2,
+      "jersey_number": null
+    },
+    "13": {
+      "total_frames": 2,
+      "first_frame": 12,
+      "last_frame": 13,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "14": {
+      "total_frames": 3,
+      "first_frame": 13,
+      "last_frame": 16,
+      "duration_frames": 3,
+      "duration_seconds": 0.3,
+      "jersey_number": null
+    },
+    "15": {
+      "total_frames": 1,
+      "first_frame": 13,
+      "last_frame": 13,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "16": {
+      "total_frames": 2,
+      "first_frame": 13,
+      "last_frame": 14,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "17": {
+      "total_frames": 5,
+      "first_frame": 14,
+      "last_frame": 19,
+      "duration_frames": 5,
+      "duration_seconds": 0.5,
+      "jersey_number": null
+    },
+    "18": {
+      "total_frames": 2,
+      "first_frame": 14,
+      "last_frame": 15,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "19": {
+      "total_frames": 2,
+      "first_frame": 14,
+      "last_frame": 15,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "20": {
+      "total_frames": 1,
+      "first_frame": 15,
+      "last_frame": 15,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "21": {
+      "total_frames": 2,
+      "first_frame": 16,
+      "last_frame": 17,
+      "duration_frames": 1,
+      "duration_seconds": 0.1,
+      "jersey_number": null
+    },
+    "22": {
+      "total_frames": 1,
+      "first_frame": 17,
+      "last_frame": 17,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "23": {
+      "total_frames": 7,
+      "first_frame": 17,
+      "last_frame": 23,
+      "duration_frames": 6,
+      "duration_seconds": 0.6,
+      "jersey_number": null
+    },
+    "24": {
+      "total_frames": 1,
+      "first_frame": 18,
+      "last_frame": 18,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "25": {
+      "total_frames": 4,
+      "first_frame": 20,
+      "last_frame": 23,
+      "duration_frames": 3,
+      "duration_seconds": 0.3,
+      "jersey_number": null
+    },
+    "26": {
+      "total_frames": 1,
+      "first_frame": 21,
+      "last_frame": 21,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    },
+    "27": {
+      "total_frames": 1,
+      "first_frame": 22,
+      "last_frame": 22,
+      "duration_frames": 0,
+      "duration_seconds": 0.0,
+      "jersey_number": null
+    }
+  },
+  "detected_events": [],
+  "frame_results": [
+    {
+      "frame_number": 0,
+      "time_seconds": 0.0,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        403.5757141113281,
+        356.21397399902344
+      ],
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            778.9757690429688,
+            209.97935485839844,
+            1171.275390625,
+            621.864990234375
+          ],
+          "confidence": 0.9635870456695557,
+          "position": [
+            975.1255798339844,
+            415.9221725463867
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 2,
+          "bbox": [
+            -3.5322189331054688,
+            97.72698974609375,
+            441.37872314453125,
+            558.4063110351562
+          ],
+          "confidence": 0.9661747217178345,
+          "position": [
+            218.9232521057129,
+            328.066650390625
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            657.193603515625,
+            -2.953970432281494,
+            806.7113037109375,
+            569.4224243164062
+          ],
+          "confidence": 0.9494506120681763,
+          "position": [
+            731.9524536132812,
+            283.2342269420624
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            298.47216796875,
+            91.3270034790039,
+            559.6414794921875,
+            486.5993957519531
+          ],
+          "confidence": 0.8694496750831604,
+          "position": [
+            429.05682373046875,
+            288.9631996154785
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            410.609619140625,
+            207.52328491210938,
+            618.7689819335938,
+            608.2769775390625
+          ],
+          "confidence": 0.9135769009590149,
+          "position": [
+            514.6893005371094,
+            407.90013122558594
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 1,
+      "time_seconds": 0.1,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        403.5757141113281,
+        356.21397399902344
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            -2.498950958251953,
+            108.28423309326172,
+            433.0134582519531,
+            569.2490234375
+          ],
+          "confidence": 0.9681238532066345,
+          "position": [
+            215.2572536468506,
+            338.76662826538086
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            786.1602172851562,
+            221.42486572265625,
+            1186.1217041015625,
+            630.1180419921875
+          ],
+          "confidence": 0.9628552198410034,
+          "position": [
+            986.1409606933594,
+            425.7714538574219
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            415.54876708984375,
+            207.29757690429688,
+            605.49609375,
+            615.4505615234375
+          ],
+          "confidence": 0.9445635676383972,
+          "position": [
+            510.5224304199219,
+            411.3740692138672
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            309.2481689453125,
+            108.9769515991211,
+            595.1461791992188,
+            497.67181396484375
+          ],
+          "confidence": 0.9000198245048523,
+          "position": [
+            452.1971740722656,
+            303.3243827819824
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            650.2511596679688,
+            -3.018043041229248,
+            779.1220092773438,
+            571.0560913085938
+          ],
+          "confidence": 0.943655252456665,
+          "position": [
+            714.6865844726562,
+            284.01902413368225
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 2,
+      "time_seconds": 0.2,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": [
+        403.5757141113281,
+        356.21397399902344
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            -3.489093780517578,
+            113.18318939208984,
+            422.4737548828125,
+            574.99609375
+          ],
+          "confidence": 0.9633404612541199,
+          "position": [
+            209.49233055114746,
+            344.0896415710449
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            795.1943969726562,
+            218.79364013671875,
+            1181.25439453125,
+            633.9555053710938
+          ],
+          "confidence": 0.9684630632400513,
+          "position": [
+            988.2243957519531,
+            426.37457275390625
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            425.0511169433594,
+            209.55230712890625,
+            596.6199951171875,
+            620.5519409179688
+          ],
+          "confidence": 0.9034687876701355,
+          "position": [
+            510.83555603027344,
+            415.0521240234375
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            643.8247680664062,
+            -2.3304319381713867,
+            763.785888671875,
+            580.8031616210938
+          ],
+          "confidence": 0.9593690037727356,
+          "position": [
+            703.8053283691406,
+            289.2363648414612
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            317.1777038574219,
+            120.5071029663086,
+            604.200927734375,
+            502.9474182128906
+          ],
+          "confidence": 0.6649331450462341,
+          "position": [
+            460.68931579589844,
+            311.7272605895996
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 6,
+          "bbox": [
+            316.308837890625,
+            121.08015441894531,
+            487.65838623046875,
+            501.55596923828125
+          ],
+          "confidence": 0.7288277745246887,
+          "position": [
+            401.9836120605469,
+            311.3180618286133
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 3,
+      "time_seconds": 0.3,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        403.5757141113281,
+        356.21397399902344
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            -2.4297142028808594,
+            119.68059539794922,
+            432.978515625,
+            582.017333984375
+          ],
+          "confidence": 0.9737210273742676,
+          "position": [
+            215.27440071105957,
+            350.8489646911621
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            332.7392883300781,
+            128.90798950195312,
+            623.4571533203125,
+            508.6617126464844
+          ],
+          "confidence": 0.9253793358802795,
+          "position": [
+            478.0982208251953,
+            318.78485107421875
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            627.3656005859375,
+            -2.786686420440674,
+            764.4579467773438,
+            587.0014038085938
+          ],
+          "confidence": 0.9603033065795898,
+          "position": [
+            695.9117736816406,
+            292.10735869407654
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            446.4319152832031,
+            215.17433166503906,
+            596.7210693359375,
+            602.5029296875
+          ],
+          "confidence": 0.9275033473968506,
+          "position": [
+            521.5764923095703,
+            408.83863067626953
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            851.9945678710938,
+            218.4764862060547,
+            1145.88427734375,
+            618.7350463867188
+          ],
+          "confidence": 0.9615708589553833,
+          "position": [
+            998.9394226074219,
+            418.6057662963867
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 4,
+      "time_seconds": 0.4,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        403.5757141113281,
+        356.21397399902344
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            0.22701263427734375,
+            125.72354888916016,
+            434.62530517578125,
+            584.1329956054688
+          ],
+          "confidence": 0.9728426337242126,
+          "position": [
+            217.4261589050293,
+            354.92827224731445
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            348.2412109375,
+            128.97088623046875,
+            643.5897216796875,
+            512.2130126953125
+          ],
+          "confidence": 0.9411006569862366,
+          "position": [
+            495.91546630859375,
+            320.5919494628906
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            619.6380004882812,
+            -1.726377010345459,
+            770.0158081054688,
+            590.1397705078125
+          ],
+          "confidence": 0.9596621990203857,
+          "position": [
+            694.826904296875,
+            294.2066967487335
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            452.91436767578125,
+            223.48057556152344,
+            599.822021484375,
+            601.3977661132812
+          ],
+          "confidence": 0.9220474362373352,
+          "position": [
+            526.3681945800781,
+            412.43917083740234
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            888.769287109375,
+            221.25296020507812,
+            1129.0653076171875,
+            621.535400390625
+          ],
+          "confidence": 0.9687544703483582,
+          "position": [
+            1008.9172973632812,
+            421.39418029785156
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 5,
+      "time_seconds": 0.5,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        765.1679077148438,
+        396.0775146484375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            13.91347885131836,
+            129.56423950195312,
+            456.81585693359375,
+            584.8956298828125
+          ],
+          "confidence": 0.9726298451423645,
+          "position": [
+            235.36466789245605,
+            357.2299346923828
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            377.73583984375,
+            121.07028198242188,
+            669.8912353515625,
+            514.6783447265625
+          ],
+          "confidence": 0.9070350527763367,
+          "position": [
+            523.8135375976562,
+            317.8743133544922
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            458.45526123046875,
+            224.9452667236328,
+            607.6168212890625,
+            619.6832275390625
+          ],
+          "confidence": 0.9165118932723999,
+          "position": [
+            533.0360412597656,
+            422.31424713134766
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            607.3856201171875,
+            -1.9172859191894531,
+            787.0258178710938,
+            595.0759887695312
+          ],
+          "confidence": 0.9566692113876343,
+          "position": [
+            697.2057189941406,
+            296.5793514251709
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            931.69580078125,
+            223.13128662109375,
+            1134.4725341796875,
+            623.145751953125
+          ],
+          "confidence": 0.9714466333389282,
+          "position": [
+            1033.0841674804688,
+            423.1385192871094
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 6,
+      "time_seconds": 0.6,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        765.1679077148438,
+        396.0775146484375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            26.06555938720703,
+            133.07415771484375,
+            464.72283935546875,
+            585.715576171875
+          ],
+          "confidence": 0.9734023213386536,
+          "position": [
+            245.3941993713379,
+            359.3948669433594
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            404.38824462890625,
+            113.29571533203125,
+            697.6978149414062,
+            521.7796020507812
+          ],
+          "confidence": 0.8648958802223206,
+          "position": [
+            551.0430297851562,
+            317.53765869140625
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            471.8263244628906,
+            230.7089385986328,
+            605.569091796875,
+            616.6306762695312
+          ],
+          "confidence": 0.9553076028823853,
+          "position": [
+            538.6977081298828,
+            423.66980743408203
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            614.3311767578125,
+            -3.746917247772217,
+            802.01708984375,
+            609.717529296875
+          ],
+          "confidence": 0.9633841514587402,
+          "position": [
+            708.1741333007812,
+            302.9853060245514
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            972.212158203125,
+            225.3916473388672,
+            1166.3924560546875,
+            624.5267333984375
+          ],
+          "confidence": 0.970157265663147,
+          "position": [
+            1069.3023071289062,
+            424.95919036865234
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 7,
+      "time_seconds": 0.7,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        765.1679077148438,
+        396.0775146484375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            33.231239318847656,
+            134.54824829101562,
+            440.9628601074219,
+            587.41650390625
+          ],
+          "confidence": 0.9694792628288269,
+          "position": [
+            237.09704971313477,
+            360.9823760986328
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            432.5746154785156,
+            111.59465789794922,
+            717.8023681640625,
+            552.5703125
+          ],
+          "confidence": 0.779409646987915,
+          "position": [
+            575.1884918212891,
+            332.0824851989746
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            471.4855651855469,
+            231.48675537109375,
+            607.0374145507812,
+            601.7489013671875
+          ],
+          "confidence": 0.9243612885475159,
+          "position": [
+            539.2614898681641,
+            416.6178283691406
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            620.98193359375,
+            -2.3647427558898926,
+            810.3607177734375,
+            617.5279541015625
+          ],
+          "confidence": 0.9376670718193054,
+          "position": [
+            715.6713256835938,
+            307.5816056728363
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            994.2534790039062,
+            224.01150512695312,
+            1186.5830078125,
+            626.311767578125
+          ],
+          "confidence": 0.9437367916107178,
+          "position": [
+            1090.4182434082031,
+            425.16163635253906
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 8,
+      "time_seconds": 0.8,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": [
+        765.1679077148438,
+        396.0775146484375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            21.249980926513672,
+            139.91351318359375,
+            451.0733642578125,
+            590.8618774414062
+          ],
+          "confidence": 0.9649083614349365,
+          "position": [
+            236.1616725921631,
+            365.3876953125
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            468.552490234375,
+            228.78701782226562,
+            605.4517822265625,
+            604.5171508789062
+          ],
+          "confidence": 0.944255530834198,
+          "position": [
+            537.0021362304688,
+            416.65208435058594
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            633.2556762695312,
+            45.60884094238281,
+            798.7439575195312,
+            622.1907958984375
+          ],
+          "confidence": 0.8986823558807373,
+          "position": [
+            715.9998168945312,
+            333.89981842041016
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            1020.27978515625,
+            216.26437377929688,
+            1206.5096435546875,
+            629.8919677734375
+          ],
+          "confidence": 0.9723659157752991,
+          "position": [
+            1113.3947143554688,
+            423.0781707763672
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            545.1661376953125,
+            108.25135803222656,
+            692.793212890625,
+            577.2037353515625
+          ],
+          "confidence": 0.8984798192977905,
+          "position": [
+            618.9796752929688,
+            342.72754669189453
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 7,
+          "bbox": [
+            -0.8196866512298584,
+            90.79041290283203,
+            34.63271713256836,
+            496.8523254394531
+          ],
+          "confidence": 0.8439194560050964,
+          "position": [
+            16.90651524066925,
+            293.8213691711426
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 9,
+      "time_seconds": 0.9,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": [
+        765.1679077148438,
+        396.0775146484375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            11.416759490966797,
+            143.1793212890625,
+            414.9984130859375,
+            593.6060791015625
+          ],
+          "confidence": 0.9593231678009033,
+          "position": [
+            213.20758628845215,
+            368.3927001953125
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            451.45318603515625,
+            218.05316162109375,
+            592.8448486328125,
+            609.4020385742188
+          ],
+          "confidence": 0.926847517490387,
+          "position": [
+            522.1490173339844,
+            413.72760009765625
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 3,
+          "bbox": [
+            620.5906372070312,
+            87.67068481445312,
+            779.0726318359375,
+            625.0570678710938
+          ],
+          "confidence": 0.8674631118774414,
+          "position": [
+            699.8316345214844,
+            356.36387634277344
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            1027.67919921875,
+            213.6467742919922,
+            1210.16162109375,
+            631.489990234375
+          ],
+          "confidence": 0.9730437397956848,
+          "position": [
+            1118.92041015625,
+            422.5683822631836
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 7,
+          "bbox": [
+            0.1868903636932373,
+            95.89820098876953,
+            22.45172882080078,
+            502.67266845703125
+          ],
+          "confidence": 0.5884770750999451,
+          "position": [
+            11.31930959224701,
+            299.2854347229004
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            539.7578125,
+            105.70149993896484,
+            682.834716796875,
+            594.0050048828125
+          ],
+          "confidence": 0.9061132073402405,
+          "position": [
+            611.2962646484375,
+            349.8532524108887
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 10,
+      "time_seconds": 1.0,
+      "num_detections": 7,
+      "num_tracked": 7,
+      "ball_position": [
+        1226.3304443359375,
+        497.9365234375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 2,
+          "bbox": [
+            -1.7530250549316406,
+            152.86599731445312,
+            327.69622802734375,
+            599.9940795898438
+          ],
+          "confidence": 0.9530991315841675,
+          "position": [
+            162.97160148620605,
+            376.43003845214844
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            1015.122314453125,
+            213.77980041503906,
+            1200.2254638671875,
+            607.8822631835938
+          ],
+          "confidence": 0.959402859210968,
+          "position": [
+            1107.6738891601562,
+            410.8310317993164
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            404.42889404296875,
+            221.7485809326172,
+            542.7213134765625,
+            610.8024291992188
+          ],
+          "confidence": 0.9131940007209778,
+          "position": [
+            473.5751037597656,
+            416.27550506591797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 4,
+          "bbox": [
+            580.4545288085938,
+            127.17245483398438,
+            723.0809936523438,
+            630.622802734375
+          ],
+          "confidence": 0.8189154863357544,
+          "position": [
+            651.7677612304688,
+            378.8976287841797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 8,
+          "bbox": [
+            -6.324882507324219,
+            360.7657775878906,
+            71.51426696777344,
+            440.50042724609375
+          ],
+          "confidence": 0.5798128843307495,
+          "position": [
+            32.59469223022461,
+            400.6331024169922
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 9,
+          "bbox": [
+            724.3652954101562,
+            235.22515869140625,
+            879.7216186523438,
+            458.5895080566406
+          ],
+          "confidence": 0.6289710998535156,
+          "position": [
+            802.04345703125,
+            346.90733337402344
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 10,
+          "bbox": [
+            507.2697448730469,
+            107.36290740966797,
+            628.3499145507812,
+            609.170166015625
+          ],
+          "confidence": 0.9165377616882324,
+          "position": [
+            567.8098297119141,
+            358.2665367126465
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 11,
+      "time_seconds": 1.1,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        1226.3304443359375,
+        497.9365234375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 10,
+          "bbox": [
+            469.7724914550781,
+            138.570556640625,
+            644.17236328125,
+            631.950927734375
+          ],
+          "confidence": 0.7238791584968567,
+          "position": [
+            556.9724273681641,
+            385.2607421875
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            967.15234375,
+            221.8122100830078,
+            1152.150390625,
+            613.2050170898438
+          ],
+          "confidence": 0.9505603909492493,
+          "position": [
+            1059.6513671875,
+            417.5086135864258
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 2,
+          "bbox": [
+            -0.15761375427246094,
+            157.6080780029297,
+            243.37216186523438,
+            604.4795532226562
+          ],
+          "confidence": 0.9265936613082886,
+          "position": [
+            121.60727405548096,
+            381.04381561279297
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 6,
+          "bbox": [
+            279.23431396484375,
+            223.1222381591797,
+            463.4354248046875,
+            610.4714965820312
+          ],
+          "confidence": 0.79266756772995,
+          "position": [
+            371.3348693847656,
+            416.79686737060547
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 11,
+          "bbox": [
+            436.78662109375,
+            110.88104248046875,
+            570.5784912109375,
+            612.8013305664062
+          ],
+          "confidence": 0.80904221534729,
+          "position": [
+            503.68255615234375,
+            361.8411865234375
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 12,
+      "time_seconds": 1.2,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": [
+        1226.3304443359375,
+        497.9365234375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 11,
+          "bbox": [
+            443.0206604003906,
+            139.4161376953125,
+            578.800537109375,
+            635.4093017578125
+          ],
+          "confidence": 0.7669489979743958,
+          "position": [
+            510.9105987548828,
+            387.4127197265625
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            918.2647094726562,
+            222.78932189941406,
+            1100.8482666015625,
+            615.3306884765625
+          ],
+          "confidence": 0.957240879535675,
+          "position": [
+            1009.5564880371094,
+            419.0600051879883
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 5,
+          "bbox": [
+            378.7178039550781,
+            118.37671661376953,
+            499.88427734375,
+            612.5255737304688
+          ],
+          "confidence": 0.7516892552375793,
+          "position": [
+            439.30104064941406,
+            365.45114517211914
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 12,
+          "bbox": [
+            184.31129455566406,
+            229.54441833496094,
+            396.3082580566406,
+            616.468505859375
+          ],
+          "confidence": 0.873924970626831,
+          "position": [
+            290.30977630615234,
+            423.00646209716797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 13,
+          "bbox": [
+            -3.5288524627685547,
+            156.8435516357422,
+            159.99815368652344,
+            606.4547729492188
+          ],
+          "confidence": 0.8936610221862793,
+          "position": [
+            78.23465061187744,
+            381.64916229248047
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 13,
+      "time_seconds": 1.3,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": [
+        1226.3304443359375,
+        497.9365234375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 5,
+          "bbox": [
+            282.34600830078125,
+            136.6307373046875,
+            464.7374267578125,
+            623.1951904296875
+          ],
+          "confidence": 0.6535568833351135,
+          "position": [
+            373.5417175292969,
+            379.9129638671875
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            824.9195556640625,
+            212.53468322753906,
+            1033.8258056640625,
+            613.0919799804688
+          ],
+          "confidence": 0.9415251612663269,
+          "position": [
+            929.3726806640625,
+            412.8133316040039
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 13,
+          "bbox": [
+            -2.08526611328125,
+            277.8847351074219,
+            134.77078247070312,
+            620.5918579101562
+          ],
+          "confidence": 0.6791071891784668,
+          "position": [
+            66.34275817871094,
+            449.23829650878906
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 14,
+          "bbox": [
+            116.28091430664062,
+            227.0358428955078,
+            277.6888122558594,
+            621.6320190429688
+          ],
+          "confidence": 0.7376835942268372,
+          "position": [
+            196.98486328125,
+            424.3339309692383
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 15,
+          "bbox": [
+            1188.3798828125,
+            327.2925720214844,
+            1285.5166015625,
+            566.1051635742188
+          ],
+          "confidence": 0.5686761140823364,
+          "position": [
+            1236.9482421875,
+            446.69886779785156
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 16,
+          "bbox": [
+            264.75860595703125,
+            119.20575714111328,
+            391.177978515625,
+            542.6751098632812
+          ],
+          "confidence": 0.7161563634872437,
+          "position": [
+            327.9682922363281,
+            330.94043350219727
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 14,
+      "time_seconds": 1.4,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": [
+        1226.3304443359375,
+        497.9365234375
+      ],
+      "tracked_players": [
+        {
+          "track_id": 16,
+          "bbox": [
+            276.41192626953125,
+            128.72727966308594,
+            389.95404052734375,
+            533.2342529296875
+          ],
+          "confidence": 0.5513244271278381,
+          "position": [
+            333.1829833984375,
+            330.9807662963867
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            749.0328369140625,
+            197.6871795654297,
+            961.013427734375,
+            610.0962524414062
+          ],
+          "confidence": 0.9328476190567017,
+          "position": [
+            855.0231323242188,
+            403.89171600341797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 12,
+          "bbox": [
+            197.8490447998047,
+            130.81187438964844,
+            389.54180908203125,
+            627.2474975585938
+          ],
+          "confidence": 0.5212113261222839,
+          "position": [
+            293.69542694091797,
+            379.0296859741211
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 17,
+          "bbox": [
+            1066.6805419921875,
+            118.1559829711914,
+            1280.75537109375,
+            560.05126953125
+          ],
+          "confidence": 0.8163110017776489,
+          "position": [
+            1173.7179565429688,
+            339.1036262512207
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 18,
+          "bbox": [
+            -0.07991790771484375,
+            220.23483276367188,
+            191.8232879638672,
+            623.917236328125
+          ],
+          "confidence": 0.857205331325531,
+          "position": [
+            95.87168502807617,
+            422.07603454589844
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 19,
+          "bbox": [
+            179.13076782226562,
+            122.7715072631836,
+            309.8974914550781,
+            544.4739990234375
+          ],
+          "confidence": 0.6466770768165588,
+          "position": [
+            244.51412963867188,
+            333.62275314331055
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 15,
+      "time_seconds": 1.5,
+      "num_detections": 6,
+      "num_tracked": 6,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            630.97998046875,
+            182.50827026367188,
+            854.7564086914062,
+            607.9017944335938
+          ],
+          "confidence": 0.9362166523933411,
+          "position": [
+            742.8681945800781,
+            395.2050323486328
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 19,
+          "bbox": [
+            166.7096710205078,
+            119.11722564697266,
+            261.25970458984375,
+            535.041748046875
+          ],
+          "confidence": 0.5453333854675293,
+          "position": [
+            213.98468780517578,
+            327.0794868469238
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 14,
+          "bbox": [
+            78.78652954101562,
+            122.26690673828125,
+            254.60076904296875,
+            621.0361938476562
+          ],
+          "confidence": 0.7460066676139832,
+          "position": [
+            166.6936492919922,
+            371.65155029296875
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 17,
+          "bbox": [
+            940.7388305664062,
+            117.03132629394531,
+            1237.3218994140625,
+            579.6376342773438
+          ],
+          "confidence": 0.7762694358825684,
+          "position": [
+            1089.0303649902344,
+            348.33448028564453
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 18,
+          "bbox": [
+            47.43988800048828,
+            123.02975463867188,
+            172.7581787109375,
+            544.0363159179688
+          ],
+          "confidence": 0.6855465173721313,
+          "position": [
+            110.09903335571289,
+            333.5330352783203
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 20,
+          "bbox": [
+            -0.08404731750488281,
+            218.45236206054688,
+            48.860591888427734,
+            625.1646118164062
+          ],
+          "confidence": 0.5516362190246582,
+          "position": [
+            24.388272285461426,
+            421.80848693847656
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 16,
+      "time_seconds": 1.6,
+      "num_detections": 4,
+      "num_tracked": 4,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 17,
+          "bbox": [
+            863.2617797851562,
+            114.88218688964844,
+            1156.35791015625,
+            578.7244873046875
+          ],
+          "confidence": 0.8296474814414978,
+          "position": [
+            1009.8098449707031,
+            346.80333709716797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            553.5765991210938,
+            185.6728515625,
+            800.5712280273438,
+            595.7024536132812
+          ],
+          "confidence": 0.9496261477470398,
+          "position": [
+            677.0739135742188,
+            390.6876525878906
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 14,
+          "bbox": [
+            3.134174346923828,
+            107.82759094238281,
+            174.12643432617188,
+            623.7151489257812
+          ],
+          "confidence": 0.8355476260185242,
+          "position": [
+            88.63030433654785,
+            365.77136993408203
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 21,
+          "bbox": [
+            -0.06085395812988281,
+            118.5589599609375,
+            87.99239349365234,
+            546.3941650390625
+          ],
+          "confidence": 0.6497514247894287,
+          "position": [
+            43.96576976776123,
+            332.4765625
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 17,
+      "time_seconds": 1.7,
+      "num_detections": 5,
+      "num_tracked": 5,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 21,
+          "bbox": [
+            -1.8044734001159668,
+            110.90312194824219,
+            77.1817626953125,
+            541.2815551757812
+          ],
+          "confidence": 0.8530482053756714,
+          "position": [
+            37.68864464759827,
+            326.0923385620117
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            435.150146484375,
+            188.91905212402344,
+            713.6038208007812,
+            584.245849609375
+          ],
+          "confidence": 0.9360554814338684,
+          "position": [
+            574.3769836425781,
+            386.5824508666992
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 17,
+          "bbox": [
+            745.1587524414062,
+            145.18817138671875,
+            1033.0179443359375,
+            580.15234375
+          ],
+          "confidence": 0.6550694108009338,
+          "position": [
+            889.0883483886719,
+            362.6702575683594
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 22,
+          "bbox": [
+            831.7962646484375,
+            144.54026794433594,
+            1033.4656982421875,
+            537.7190551757812
+          ],
+          "confidence": 0.6350537538528442,
+          "position": [
+            932.6309814453125,
+            341.1296615600586
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            743.0941162109375,
+            184.2618408203125,
+            924.3350830078125,
+            581.8378295898438
+          ],
+          "confidence": 0.5785201787948608,
+          "position": [
+            833.714599609375,
+            383.0498352050781
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 18,
+      "time_seconds": 1.8,
+      "num_detections": 3,
+      "num_tracked": 3,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 23,
+          "bbox": [
+            732.3480834960938,
+            153.70431518554688,
+            920.968994140625,
+            559.6802368164062
+          ],
+          "confidence": 0.8805038332939148,
+          "position": [
+            826.6585388183594,
+            356.69227600097656
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 1,
+          "bbox": [
+            357.28277587890625,
+            201.49867248535156,
+            642.0435180664062,
+            586.8961791992188
+          ],
+          "confidence": 0.9447858333587646,
+          "position": [
+            499.66314697265625,
+            394.19742584228516
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 24,
+          "bbox": [
+            645.8013305664062,
+            248.33953857421875,
+            796.240478515625,
+            583.2044067382812
+          ],
+          "confidence": 0.7666438221931458,
+          "position": [
+            721.0209045410156,
+            415.77197265625
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 19,
+      "time_seconds": 1.9,
+      "num_detections": 3,
+      "num_tracked": 3,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            320.5900573730469,
+            201.35838317871094,
+            606.4212646484375,
+            589.677001953125
+          ],
+          "confidence": 0.9454154372215271,
+          "position": [
+            463.5056610107422,
+            395.51769256591797
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            683.5822143554688,
+            156.92721557617188,
+            857.2005615234375,
+            562.958984375
+          ],
+          "confidence": 0.8889238238334656,
+          "position": [
+            770.3913879394531,
+            359.94309997558594
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 17,
+          "bbox": [
+            524.0762939453125,
+            252.00885009765625,
+            736.2843017578125,
+            585.392822265625
+          ],
+          "confidence": 0.7923732399940491,
+          "position": [
+            630.1802978515625,
+            418.7008361816406
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 20,
+      "time_seconds": 2.0,
+      "num_detections": 3,
+      "num_tracked": 3,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            279.9416809082031,
+            201.93568420410156,
+            577.2086181640625,
+            594.2780151367188
+          ],
+          "confidence": 0.9487905502319336,
+          "position": [
+            428.5751495361328,
+            398.10684967041016
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            630.620361328125,
+            175.42909240722656,
+            776.4098510742188,
+            563.0366821289062
+          ],
+          "confidence": 0.8015070557594299,
+          "position": [
+            703.5151062011719,
+            369.2328872680664
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 25,
+          "bbox": [
+            522.4254760742188,
+            256.72210693359375,
+            671.1824951171875,
+            591.1719360351562
+          ],
+          "confidence": 0.696287989616394,
+          "position": [
+            596.8039855957031,
+            423.947021484375
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 21,
+      "time_seconds": 2.1,
+      "num_detections": 4,
+      "num_tracked": 4,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            266.7889709472656,
+            199.5865478515625,
+            565.74072265625,
+            598.3515625
+          ],
+          "confidence": 0.9633755683898926,
+          "position": [
+            416.2648468017578,
+            398.96905517578125
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 25,
+          "bbox": [
+            434.982666015625,
+            223.46826171875,
+            682.144287109375,
+            595.4356689453125
+          ],
+          "confidence": 0.7971086502075195,
+          "position": [
+            558.5634765625,
+            409.45196533203125
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            612.1278076171875,
+            182.17404174804688,
+            757.1983642578125,
+            563.0010986328125
+          ],
+          "confidence": 0.9411288499832153,
+          "position": [
+            684.6630859375,
+            372.5875701904297
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 26,
+          "bbox": [
+            -1.1356687545776367,
+            239.0171356201172,
+            77.08651733398438,
+            309.3596496582031
+          ],
+          "confidence": 0.7873727679252625,
+          "position": [
+            37.97542428970337,
+            274.18839263916016
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 22,
+      "time_seconds": 2.2,
+      "num_detections": 4,
+      "num_tracked": 4,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            255.2847900390625,
+            191.8356475830078,
+            542.837890625,
+            611.8357543945312
+          ],
+          "confidence": 0.9677314162254333,
+          "position": [
+            399.06134033203125,
+            401.83570098876953
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            594.46630859375,
+            188.5635223388672,
+            749.4647827148438,
+            574.4503173828125
+          ],
+          "confidence": 0.9260362982749939,
+          "position": [
+            671.9655456542969,
+            381.50691986083984
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 25,
+          "bbox": [
+            447.0279235839844,
+            233.77415466308594,
+            598.5013427734375,
+            605.1436767578125
+          ],
+          "confidence": 0.8611287474632263,
+          "position": [
+            522.7646331787109,
+            419.4589157104492
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 27,
+          "bbox": [
+            288.1752014160156,
+            609.928466796875,
+            402.8304443359375,
+            724.0477905273438
+          ],
+          "confidence": 0.5273424983024597,
+          "position": [
+            345.50282287597656,
+            666.9881286621094
+          ],
+          "jersey_number": null
+        }
+      ]
+    },
+    {
+      "frame_number": 23,
+      "time_seconds": 2.3,
+      "num_detections": 3,
+      "num_tracked": 3,
+      "ball_position": null,
+      "tracked_players": [
+        {
+          "track_id": 1,
+          "bbox": [
+            261.2953186035156,
+            190.1403350830078,
+            530.007568359375,
+            624.9147338867188
+          ],
+          "confidence": 0.9634842276573181,
+          "position": [
+            395.6514434814453,
+            407.5275344848633
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 23,
+          "bbox": [
+            593.3740234375,
+            193.7494354248047,
+            759.0213012695312,
+            600.9066772460938
+          ],
+          "confidence": 0.9211560487747192,
+          "position": [
+            676.1976623535156,
+            397.3280563354492
+          ],
+          "jersey_number": null
+        },
+        {
+          "track_id": 25,
+          "bbox": [
+            445.91943359375,
+            242.2858123779297,
+            610.09033203125,
+            595.2929077148438
+          ],
+          "confidence": 0.8660845160484314,
+          "position": [
+            528.0048828125,
+            418.7893600463867
+          ],
+          "jersey_number": null
+        }
+      ]
+    }
+  ],
+  "all_tracked_players": [
+    {
+      "frame": 0,
+      "time": 0.0,
+      "track_id": 1,
+      "bbox": [
+        778.9757690429688,
+        209.97935485839844,
+        1171.275390625,
+        621.864990234375
+      ],
+      "confidence": 0.9635870456695557,
+      "position": [
+        975.1255798339844,
+        415.9221725463867
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 0,
+      "time": 0.0,
+      "track_id": 2,
+      "bbox": [
+        -3.5322189331054688,
+        97.72698974609375,
+        441.37872314453125,
+        558.4063110351562
+      ],
+      "confidence": 0.9661747217178345,
+      "position": [
+        218.9232521057129,
+        328.066650390625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 0,
+      "time": 0.0,
+      "track_id": 3,
+      "bbox": [
+        657.193603515625,
+        -2.953970432281494,
+        806.7113037109375,
+        569.4224243164062
+      ],
+      "confidence": 0.9494506120681763,
+      "position": [
+        731.9524536132812,
+        283.2342269420624
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 0,
+      "time": 0.0,
+      "track_id": 4,
+      "bbox": [
+        298.47216796875,
+        91.3270034790039,
+        559.6414794921875,
+        486.5993957519531
+      ],
+      "confidence": 0.8694496750831604,
+      "position": [
+        429.05682373046875,
+        288.9631996154785
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 0,
+      "time": 0.0,
+      "track_id": 5,
+      "bbox": [
+        410.609619140625,
+        207.52328491210938,
+        618.7689819335938,
+        608.2769775390625
+      ],
+      "confidence": 0.9135769009590149,
+      "position": [
+        514.6893005371094,
+        407.90013122558594
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 1,
+      "time": 0.1,
+      "track_id": 2,
+      "bbox": [
+        -2.498950958251953,
+        108.28423309326172,
+        433.0134582519531,
+        569.2490234375
+      ],
+      "confidence": 0.9681238532066345,
+      "position": [
+        215.2572536468506,
+        338.76662826538086
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 1,
+      "time": 0.1,
+      "track_id": 1,
+      "bbox": [
+        786.1602172851562,
+        221.42486572265625,
+        1186.1217041015625,
+        630.1180419921875
+      ],
+      "confidence": 0.9628552198410034,
+      "position": [
+        986.1409606933594,
+        425.7714538574219
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 1,
+      "time": 0.1,
+      "track_id": 5,
+      "bbox": [
+        415.54876708984375,
+        207.29757690429688,
+        605.49609375,
+        615.4505615234375
+      ],
+      "confidence": 0.9445635676383972,
+      "position": [
+        510.5224304199219,
+        411.3740692138672
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 1,
+      "time": 0.1,
+      "track_id": 4,
+      "bbox": [
+        309.2481689453125,
+        108.9769515991211,
+        595.1461791992188,
+        497.67181396484375
+      ],
+      "confidence": 0.9000198245048523,
+      "position": [
+        452.1971740722656,
+        303.3243827819824
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 1,
+      "time": 0.1,
+      "track_id": 3,
+      "bbox": [
+        650.2511596679688,
+        -3.018043041229248,
+        779.1220092773438,
+        571.0560913085938
+      ],
+      "confidence": 0.943655252456665,
+      "position": [
+        714.6865844726562,
+        284.01902413368225
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 2,
+      "bbox": [
+        -3.489093780517578,
+        113.18318939208984,
+        422.4737548828125,
+        574.99609375
+      ],
+      "confidence": 0.9633404612541199,
+      "position": [
+        209.49233055114746,
+        344.0896415710449
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 1,
+      "bbox": [
+        795.1943969726562,
+        218.79364013671875,
+        1181.25439453125,
+        633.9555053710938
+      ],
+      "confidence": 0.9684630632400513,
+      "position": [
+        988.2243957519531,
+        426.37457275390625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 5,
+      "bbox": [
+        425.0511169433594,
+        209.55230712890625,
+        596.6199951171875,
+        620.5519409179688
+      ],
+      "confidence": 0.9034687876701355,
+      "position": [
+        510.83555603027344,
+        415.0521240234375
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 3,
+      "bbox": [
+        643.8247680664062,
+        -2.3304319381713867,
+        763.785888671875,
+        580.8031616210938
+      ],
+      "confidence": 0.9593690037727356,
+      "position": [
+        703.8053283691406,
+        289.2363648414612
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 4,
+      "bbox": [
+        317.1777038574219,
+        120.5071029663086,
+        604.200927734375,
+        502.9474182128906
+      ],
+      "confidence": 0.6649331450462341,
+      "position": [
+        460.68931579589844,
+        311.7272605895996
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 2,
+      "time": 0.2,
+      "track_id": 6,
+      "bbox": [
+        316.308837890625,
+        121.08015441894531,
+        487.65838623046875,
+        501.55596923828125
+      ],
+      "confidence": 0.7288277745246887,
+      "position": [
+        401.9836120605469,
+        311.3180618286133
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 3,
+      "time": 0.3,
+      "track_id": 2,
+      "bbox": [
+        -2.4297142028808594,
+        119.68059539794922,
+        432.978515625,
+        582.017333984375
+      ],
+      "confidence": 0.9737210273742676,
+      "position": [
+        215.27440071105957,
+        350.8489646911621
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 3,
+      "time": 0.3,
+      "track_id": 4,
+      "bbox": [
+        332.7392883300781,
+        128.90798950195312,
+        623.4571533203125,
+        508.6617126464844
+      ],
+      "confidence": 0.9253793358802795,
+      "position": [
+        478.0982208251953,
+        318.78485107421875
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 3,
+      "time": 0.3,
+      "track_id": 3,
+      "bbox": [
+        627.3656005859375,
+        -2.786686420440674,
+        764.4579467773438,
+        587.0014038085938
+      ],
+      "confidence": 0.9603033065795898,
+      "position": [
+        695.9117736816406,
+        292.10735869407654
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 3,
+      "time": 0.3,
+      "track_id": 5,
+      "bbox": [
+        446.4319152832031,
+        215.17433166503906,
+        596.7210693359375,
+        602.5029296875
+      ],
+      "confidence": 0.9275033473968506,
+      "position": [
+        521.5764923095703,
+        408.83863067626953
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 3,
+      "time": 0.3,
+      "track_id": 1,
+      "bbox": [
+        851.9945678710938,
+        218.4764862060547,
+        1145.88427734375,
+        618.7350463867188
+      ],
+      "confidence": 0.9615708589553833,
+      "position": [
+        998.9394226074219,
+        418.6057662963867
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 4,
+      "time": 0.4,
+      "track_id": 2,
+      "bbox": [
+        0.22701263427734375,
+        125.72354888916016,
+        434.62530517578125,
+        584.1329956054688
+      ],
+      "confidence": 0.9728426337242126,
+      "position": [
+        217.4261589050293,
+        354.92827224731445
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 4,
+      "time": 0.4,
+      "track_id": 4,
+      "bbox": [
+        348.2412109375,
+        128.97088623046875,
+        643.5897216796875,
+        512.2130126953125
+      ],
+      "confidence": 0.9411006569862366,
+      "position": [
+        495.91546630859375,
+        320.5919494628906
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 4,
+      "time": 0.4,
+      "track_id": 3,
+      "bbox": [
+        619.6380004882812,
+        -1.726377010345459,
+        770.0158081054688,
+        590.1397705078125
+      ],
+      "confidence": 0.9596621990203857,
+      "position": [
+        694.826904296875,
+        294.2066967487335
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 4,
+      "time": 0.4,
+      "track_id": 5,
+      "bbox": [
+        452.91436767578125,
+        223.48057556152344,
+        599.822021484375,
+        601.3977661132812
+      ],
+      "confidence": 0.9220474362373352,
+      "position": [
+        526.3681945800781,
+        412.43917083740234
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 4,
+      "time": 0.4,
+      "track_id": 1,
+      "bbox": [
+        888.769287109375,
+        221.25296020507812,
+        1129.0653076171875,
+        621.535400390625
+      ],
+      "confidence": 0.9687544703483582,
+      "position": [
+        1008.9172973632812,
+        421.39418029785156
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 5,
+      "time": 0.5,
+      "track_id": 2,
+      "bbox": [
+        13.91347885131836,
+        129.56423950195312,
+        456.81585693359375,
+        584.8956298828125
+      ],
+      "confidence": 0.9726298451423645,
+      "position": [
+        235.36466789245605,
+        357.2299346923828
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 5,
+      "time": 0.5,
+      "track_id": 4,
+      "bbox": [
+        377.73583984375,
+        121.07028198242188,
+        669.8912353515625,
+        514.6783447265625
+      ],
+      "confidence": 0.9070350527763367,
+      "position": [
+        523.8135375976562,
+        317.8743133544922
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 5,
+      "time": 0.5,
+      "track_id": 5,
+      "bbox": [
+        458.45526123046875,
+        224.9452667236328,
+        607.6168212890625,
+        619.6832275390625
+      ],
+      "confidence": 0.9165118932723999,
+      "position": [
+        533.0360412597656,
+        422.31424713134766
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 5,
+      "time": 0.5,
+      "track_id": 3,
+      "bbox": [
+        607.3856201171875,
+        -1.9172859191894531,
+        787.0258178710938,
+        595.0759887695312
+      ],
+      "confidence": 0.9566692113876343,
+      "position": [
+        697.2057189941406,
+        296.5793514251709
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 5,
+      "time": 0.5,
+      "track_id": 1,
+      "bbox": [
+        931.69580078125,
+        223.13128662109375,
+        1134.4725341796875,
+        623.145751953125
+      ],
+      "confidence": 0.9714466333389282,
+      "position": [
+        1033.0841674804688,
+        423.1385192871094
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 6,
+      "time": 0.6,
+      "track_id": 2,
+      "bbox": [
+        26.06555938720703,
+        133.07415771484375,
+        464.72283935546875,
+        585.715576171875
+      ],
+      "confidence": 0.9734023213386536,
+      "position": [
+        245.3941993713379,
+        359.3948669433594
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 6,
+      "time": 0.6,
+      "track_id": 4,
+      "bbox": [
+        404.38824462890625,
+        113.29571533203125,
+        697.6978149414062,
+        521.7796020507812
+      ],
+      "confidence": 0.8648958802223206,
+      "position": [
+        551.0430297851562,
+        317.53765869140625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 6,
+      "time": 0.6,
+      "track_id": 5,
+      "bbox": [
+        471.8263244628906,
+        230.7089385986328,
+        605.569091796875,
+        616.6306762695312
+      ],
+      "confidence": 0.9553076028823853,
+      "position": [
+        538.6977081298828,
+        423.66980743408203
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 6,
+      "time": 0.6,
+      "track_id": 3,
+      "bbox": [
+        614.3311767578125,
+        -3.746917247772217,
+        802.01708984375,
+        609.717529296875
+      ],
+      "confidence": 0.9633841514587402,
+      "position": [
+        708.1741333007812,
+        302.9853060245514
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 6,
+      "time": 0.6,
+      "track_id": 1,
+      "bbox": [
+        972.212158203125,
+        225.3916473388672,
+        1166.3924560546875,
+        624.5267333984375
+      ],
+      "confidence": 0.970157265663147,
+      "position": [
+        1069.3023071289062,
+        424.95919036865234
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 7,
+      "time": 0.7,
+      "track_id": 2,
+      "bbox": [
+        33.231239318847656,
+        134.54824829101562,
+        440.9628601074219,
+        587.41650390625
+      ],
+      "confidence": 0.9694792628288269,
+      "position": [
+        237.09704971313477,
+        360.9823760986328
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 7,
+      "time": 0.7,
+      "track_id": 4,
+      "bbox": [
+        432.5746154785156,
+        111.59465789794922,
+        717.8023681640625,
+        552.5703125
+      ],
+      "confidence": 0.779409646987915,
+      "position": [
+        575.1884918212891,
+        332.0824851989746
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 7,
+      "time": 0.7,
+      "track_id": 5,
+      "bbox": [
+        471.4855651855469,
+        231.48675537109375,
+        607.0374145507812,
+        601.7489013671875
+      ],
+      "confidence": 0.9243612885475159,
+      "position": [
+        539.2614898681641,
+        416.6178283691406
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 7,
+      "time": 0.7,
+      "track_id": 3,
+      "bbox": [
+        620.98193359375,
+        -2.3647427558898926,
+        810.3607177734375,
+        617.5279541015625
+      ],
+      "confidence": 0.9376670718193054,
+      "position": [
+        715.6713256835938,
+        307.5816056728363
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 7,
+      "time": 0.7,
+      "track_id": 1,
+      "bbox": [
+        994.2534790039062,
+        224.01150512695312,
+        1186.5830078125,
+        626.311767578125
+      ],
+      "confidence": 0.9437367916107178,
+      "position": [
+        1090.4182434082031,
+        425.16163635253906
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 2,
+      "bbox": [
+        21.249980926513672,
+        139.91351318359375,
+        451.0733642578125,
+        590.8618774414062
+      ],
+      "confidence": 0.9649083614349365,
+      "position": [
+        236.1616725921631,
+        365.3876953125
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 5,
+      "bbox": [
+        468.552490234375,
+        228.78701782226562,
+        605.4517822265625,
+        604.5171508789062
+      ],
+      "confidence": 0.944255530834198,
+      "position": [
+        537.0021362304688,
+        416.65208435058594
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 3,
+      "bbox": [
+        633.2556762695312,
+        45.60884094238281,
+        798.7439575195312,
+        622.1907958984375
+      ],
+      "confidence": 0.8986823558807373,
+      "position": [
+        715.9998168945312,
+        333.89981842041016
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 1,
+      "bbox": [
+        1020.27978515625,
+        216.26437377929688,
+        1206.5096435546875,
+        629.8919677734375
+      ],
+      "confidence": 0.9723659157752991,
+      "position": [
+        1113.3947143554688,
+        423.0781707763672
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 4,
+      "bbox": [
+        545.1661376953125,
+        108.25135803222656,
+        692.793212890625,
+        577.2037353515625
+      ],
+      "confidence": 0.8984798192977905,
+      "position": [
+        618.9796752929688,
+        342.72754669189453
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 8,
+      "time": 0.8,
+      "track_id": 7,
+      "bbox": [
+        -0.8196866512298584,
+        90.79041290283203,
+        34.63271713256836,
+        496.8523254394531
+      ],
+      "confidence": 0.8439194560050964,
+      "position": [
+        16.90651524066925,
+        293.8213691711426
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 2,
+      "bbox": [
+        11.416759490966797,
+        143.1793212890625,
+        414.9984130859375,
+        593.6060791015625
+      ],
+      "confidence": 0.9593231678009033,
+      "position": [
+        213.20758628845215,
+        368.3927001953125
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 5,
+      "bbox": [
+        451.45318603515625,
+        218.05316162109375,
+        592.8448486328125,
+        609.4020385742188
+      ],
+      "confidence": 0.926847517490387,
+      "position": [
+        522.1490173339844,
+        413.72760009765625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 3,
+      "bbox": [
+        620.5906372070312,
+        87.67068481445312,
+        779.0726318359375,
+        625.0570678710938
+      ],
+      "confidence": 0.8674631118774414,
+      "position": [
+        699.8316345214844,
+        356.36387634277344
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 1,
+      "bbox": [
+        1027.67919921875,
+        213.6467742919922,
+        1210.16162109375,
+        631.489990234375
+      ],
+      "confidence": 0.9730437397956848,
+      "position": [
+        1118.92041015625,
+        422.5683822631836
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 7,
+      "bbox": [
+        0.1868903636932373,
+        95.89820098876953,
+        22.45172882080078,
+        502.67266845703125
+      ],
+      "confidence": 0.5884770750999451,
+      "position": [
+        11.31930959224701,
+        299.2854347229004
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 9,
+      "time": 0.9,
+      "track_id": 4,
+      "bbox": [
+        539.7578125,
+        105.70149993896484,
+        682.834716796875,
+        594.0050048828125
+      ],
+      "confidence": 0.9061132073402405,
+      "position": [
+        611.2962646484375,
+        349.8532524108887
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 2,
+      "bbox": [
+        -1.7530250549316406,
+        152.86599731445312,
+        327.69622802734375,
+        599.9940795898438
+      ],
+      "confidence": 0.9530991315841675,
+      "position": [
+        162.97160148620605,
+        376.43003845214844
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 1,
+      "bbox": [
+        1015.122314453125,
+        213.77980041503906,
+        1200.2254638671875,
+        607.8822631835938
+      ],
+      "confidence": 0.959402859210968,
+      "position": [
+        1107.6738891601562,
+        410.8310317993164
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 5,
+      "bbox": [
+        404.42889404296875,
+        221.7485809326172,
+        542.7213134765625,
+        610.8024291992188
+      ],
+      "confidence": 0.9131940007209778,
+      "position": [
+        473.5751037597656,
+        416.27550506591797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 4,
+      "bbox": [
+        580.4545288085938,
+        127.17245483398438,
+        723.0809936523438,
+        630.622802734375
+      ],
+      "confidence": 0.8189154863357544,
+      "position": [
+        651.7677612304688,
+        378.8976287841797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 8,
+      "bbox": [
+        -6.324882507324219,
+        360.7657775878906,
+        71.51426696777344,
+        440.50042724609375
+      ],
+      "confidence": 0.5798128843307495,
+      "position": [
+        32.59469223022461,
+        400.6331024169922
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 9,
+      "bbox": [
+        724.3652954101562,
+        235.22515869140625,
+        879.7216186523438,
+        458.5895080566406
+      ],
+      "confidence": 0.6289710998535156,
+      "position": [
+        802.04345703125,
+        346.90733337402344
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 10,
+      "time": 1.0,
+      "track_id": 10,
+      "bbox": [
+        507.2697448730469,
+        107.36290740966797,
+        628.3499145507812,
+        609.170166015625
+      ],
+      "confidence": 0.9165377616882324,
+      "position": [
+        567.8098297119141,
+        358.2665367126465
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 11,
+      "time": 1.1,
+      "track_id": 10,
+      "bbox": [
+        469.7724914550781,
+        138.570556640625,
+        644.17236328125,
+        631.950927734375
+      ],
+      "confidence": 0.7238791584968567,
+      "position": [
+        556.9724273681641,
+        385.2607421875
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 11,
+      "time": 1.1,
+      "track_id": 1,
+      "bbox": [
+        967.15234375,
+        221.8122100830078,
+        1152.150390625,
+        613.2050170898438
+      ],
+      "confidence": 0.9505603909492493,
+      "position": [
+        1059.6513671875,
+        417.5086135864258
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 11,
+      "time": 1.1,
+      "track_id": 2,
+      "bbox": [
+        -0.15761375427246094,
+        157.6080780029297,
+        243.37216186523438,
+        604.4795532226562
+      ],
+      "confidence": 0.9265936613082886,
+      "position": [
+        121.60727405548096,
+        381.04381561279297
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 11,
+      "time": 1.1,
+      "track_id": 6,
+      "bbox": [
+        279.23431396484375,
+        223.1222381591797,
+        463.4354248046875,
+        610.4714965820312
+      ],
+      "confidence": 0.79266756772995,
+      "position": [
+        371.3348693847656,
+        416.79686737060547
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 11,
+      "time": 1.1,
+      "track_id": 11,
+      "bbox": [
+        436.78662109375,
+        110.88104248046875,
+        570.5784912109375,
+        612.8013305664062
+      ],
+      "confidence": 0.80904221534729,
+      "position": [
+        503.68255615234375,
+        361.8411865234375
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 12,
+      "time": 1.2,
+      "track_id": 11,
+      "bbox": [
+        443.0206604003906,
+        139.4161376953125,
+        578.800537109375,
+        635.4093017578125
+      ],
+      "confidence": 0.7669489979743958,
+      "position": [
+        510.9105987548828,
+        387.4127197265625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 12,
+      "time": 1.2,
+      "track_id": 1,
+      "bbox": [
+        918.2647094726562,
+        222.78932189941406,
+        1100.8482666015625,
+        615.3306884765625
+      ],
+      "confidence": 0.957240879535675,
+      "position": [
+        1009.5564880371094,
+        419.0600051879883
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 12,
+      "time": 1.2,
+      "track_id": 5,
+      "bbox": [
+        378.7178039550781,
+        118.37671661376953,
+        499.88427734375,
+        612.5255737304688
+      ],
+      "confidence": 0.7516892552375793,
+      "position": [
+        439.30104064941406,
+        365.45114517211914
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 12,
+      "time": 1.2,
+      "track_id": 12,
+      "bbox": [
+        184.31129455566406,
+        229.54441833496094,
+        396.3082580566406,
+        616.468505859375
+      ],
+      "confidence": 0.873924970626831,
+      "position": [
+        290.30977630615234,
+        423.00646209716797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 12,
+      "time": 1.2,
+      "track_id": 13,
+      "bbox": [
+        -3.5288524627685547,
+        156.8435516357422,
+        159.99815368652344,
+        606.4547729492188
+      ],
+      "confidence": 0.8936610221862793,
+      "position": [
+        78.23465061187744,
+        381.64916229248047
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 5,
+      "bbox": [
+        282.34600830078125,
+        136.6307373046875,
+        464.7374267578125,
+        623.1951904296875
+      ],
+      "confidence": 0.6535568833351135,
+      "position": [
+        373.5417175292969,
+        379.9129638671875
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 1,
+      "bbox": [
+        824.9195556640625,
+        212.53468322753906,
+        1033.8258056640625,
+        613.0919799804688
+      ],
+      "confidence": 0.9415251612663269,
+      "position": [
+        929.3726806640625,
+        412.8133316040039
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 13,
+      "bbox": [
+        -2.08526611328125,
+        277.8847351074219,
+        134.77078247070312,
+        620.5918579101562
+      ],
+      "confidence": 0.6791071891784668,
+      "position": [
+        66.34275817871094,
+        449.23829650878906
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 14,
+      "bbox": [
+        116.28091430664062,
+        227.0358428955078,
+        277.6888122558594,
+        621.6320190429688
+      ],
+      "confidence": 0.7376835942268372,
+      "position": [
+        196.98486328125,
+        424.3339309692383
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 15,
+      "bbox": [
+        1188.3798828125,
+        327.2925720214844,
+        1285.5166015625,
+        566.1051635742188
+      ],
+      "confidence": 0.5686761140823364,
+      "position": [
+        1236.9482421875,
+        446.69886779785156
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 13,
+      "time": 1.3,
+      "track_id": 16,
+      "bbox": [
+        264.75860595703125,
+        119.20575714111328,
+        391.177978515625,
+        542.6751098632812
+      ],
+      "confidence": 0.7161563634872437,
+      "position": [
+        327.9682922363281,
+        330.94043350219727
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 16,
+      "bbox": [
+        276.41192626953125,
+        128.72727966308594,
+        389.95404052734375,
+        533.2342529296875
+      ],
+      "confidence": 0.5513244271278381,
+      "position": [
+        333.1829833984375,
+        330.9807662963867
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 1,
+      "bbox": [
+        749.0328369140625,
+        197.6871795654297,
+        961.013427734375,
+        610.0962524414062
+      ],
+      "confidence": 0.9328476190567017,
+      "position": [
+        855.0231323242188,
+        403.89171600341797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 12,
+      "bbox": [
+        197.8490447998047,
+        130.81187438964844,
+        389.54180908203125,
+        627.2474975585938
+      ],
+      "confidence": 0.5212113261222839,
+      "position": [
+        293.69542694091797,
+        379.0296859741211
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 17,
+      "bbox": [
+        1066.6805419921875,
+        118.1559829711914,
+        1280.75537109375,
+        560.05126953125
+      ],
+      "confidence": 0.8163110017776489,
+      "position": [
+        1173.7179565429688,
+        339.1036262512207
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 18,
+      "bbox": [
+        -0.07991790771484375,
+        220.23483276367188,
+        191.8232879638672,
+        623.917236328125
+      ],
+      "confidence": 0.857205331325531,
+      "position": [
+        95.87168502807617,
+        422.07603454589844
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 14,
+      "time": 1.4,
+      "track_id": 19,
+      "bbox": [
+        179.13076782226562,
+        122.7715072631836,
+        309.8974914550781,
+        544.4739990234375
+      ],
+      "confidence": 0.6466770768165588,
+      "position": [
+        244.51412963867188,
+        333.62275314331055
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 1,
+      "bbox": [
+        630.97998046875,
+        182.50827026367188,
+        854.7564086914062,
+        607.9017944335938
+      ],
+      "confidence": 0.9362166523933411,
+      "position": [
+        742.8681945800781,
+        395.2050323486328
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 19,
+      "bbox": [
+        166.7096710205078,
+        119.11722564697266,
+        261.25970458984375,
+        535.041748046875
+      ],
+      "confidence": 0.5453333854675293,
+      "position": [
+        213.98468780517578,
+        327.0794868469238
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 14,
+      "bbox": [
+        78.78652954101562,
+        122.26690673828125,
+        254.60076904296875,
+        621.0361938476562
+      ],
+      "confidence": 0.7460066676139832,
+      "position": [
+        166.6936492919922,
+        371.65155029296875
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 17,
+      "bbox": [
+        940.7388305664062,
+        117.03132629394531,
+        1237.3218994140625,
+        579.6376342773438
+      ],
+      "confidence": 0.7762694358825684,
+      "position": [
+        1089.0303649902344,
+        348.33448028564453
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 18,
+      "bbox": [
+        47.43988800048828,
+        123.02975463867188,
+        172.7581787109375,
+        544.0363159179688
+      ],
+      "confidence": 0.6855465173721313,
+      "position": [
+        110.09903335571289,
+        333.5330352783203
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 15,
+      "time": 1.5,
+      "track_id": 20,
+      "bbox": [
+        -0.08404731750488281,
+        218.45236206054688,
+        48.860591888427734,
+        625.1646118164062
+      ],
+      "confidence": 0.5516362190246582,
+      "position": [
+        24.388272285461426,
+        421.80848693847656
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 16,
+      "time": 1.6,
+      "track_id": 17,
+      "bbox": [
+        863.2617797851562,
+        114.88218688964844,
+        1156.35791015625,
+        578.7244873046875
+      ],
+      "confidence": 0.8296474814414978,
+      "position": [
+        1009.8098449707031,
+        346.80333709716797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 16,
+      "time": 1.6,
+      "track_id": 1,
+      "bbox": [
+        553.5765991210938,
+        185.6728515625,
+        800.5712280273438,
+        595.7024536132812
+      ],
+      "confidence": 0.9496261477470398,
+      "position": [
+        677.0739135742188,
+        390.6876525878906
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 16,
+      "time": 1.6,
+      "track_id": 14,
+      "bbox": [
+        3.134174346923828,
+        107.82759094238281,
+        174.12643432617188,
+        623.7151489257812
+      ],
+      "confidence": 0.8355476260185242,
+      "position": [
+        88.63030433654785,
+        365.77136993408203
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 16,
+      "time": 1.6,
+      "track_id": 21,
+      "bbox": [
+        -0.06085395812988281,
+        118.5589599609375,
+        87.99239349365234,
+        546.3941650390625
+      ],
+      "confidence": 0.6497514247894287,
+      "position": [
+        43.96576976776123,
+        332.4765625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 17,
+      "time": 1.7,
+      "track_id": 21,
+      "bbox": [
+        -1.8044734001159668,
+        110.90312194824219,
+        77.1817626953125,
+        541.2815551757812
+      ],
+      "confidence": 0.8530482053756714,
+      "position": [
+        37.68864464759827,
+        326.0923385620117
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 17,
+      "time": 1.7,
+      "track_id": 1,
+      "bbox": [
+        435.150146484375,
+        188.91905212402344,
+        713.6038208007812,
+        584.245849609375
+      ],
+      "confidence": 0.9360554814338684,
+      "position": [
+        574.3769836425781,
+        386.5824508666992
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 17,
+      "time": 1.7,
+      "track_id": 17,
+      "bbox": [
+        745.1587524414062,
+        145.18817138671875,
+        1033.0179443359375,
+        580.15234375
+      ],
+      "confidence": 0.6550694108009338,
+      "position": [
+        889.0883483886719,
+        362.6702575683594
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 17,
+      "time": 1.7,
+      "track_id": 22,
+      "bbox": [
+        831.7962646484375,
+        144.54026794433594,
+        1033.4656982421875,
+        537.7190551757812
+      ],
+      "confidence": 0.6350537538528442,
+      "position": [
+        932.6309814453125,
+        341.1296615600586
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 17,
+      "time": 1.7,
+      "track_id": 23,
+      "bbox": [
+        743.0941162109375,
+        184.2618408203125,
+        924.3350830078125,
+        581.8378295898438
+      ],
+      "confidence": 0.5785201787948608,
+      "position": [
+        833.714599609375,
+        383.0498352050781
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 18,
+      "time": 1.8,
+      "track_id": 23,
+      "bbox": [
+        732.3480834960938,
+        153.70431518554688,
+        920.968994140625,
+        559.6802368164062
+      ],
+      "confidence": 0.8805038332939148,
+      "position": [
+        826.6585388183594,
+        356.69227600097656
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 18,
+      "time": 1.8,
+      "track_id": 1,
+      "bbox": [
+        357.28277587890625,
+        201.49867248535156,
+        642.0435180664062,
+        586.8961791992188
+      ],
+      "confidence": 0.9447858333587646,
+      "position": [
+        499.66314697265625,
+        394.19742584228516
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 18,
+      "time": 1.8,
+      "track_id": 24,
+      "bbox": [
+        645.8013305664062,
+        248.33953857421875,
+        796.240478515625,
+        583.2044067382812
+      ],
+      "confidence": 0.7666438221931458,
+      "position": [
+        721.0209045410156,
+        415.77197265625
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 19,
+      "time": 1.9,
+      "track_id": 1,
+      "bbox": [
+        320.5900573730469,
+        201.35838317871094,
+        606.4212646484375,
+        589.677001953125
+      ],
+      "confidence": 0.9454154372215271,
+      "position": [
+        463.5056610107422,
+        395.51769256591797
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 19,
+      "time": 1.9,
+      "track_id": 23,
+      "bbox": [
+        683.5822143554688,
+        156.92721557617188,
+        857.2005615234375,
+        562.958984375
+      ],
+      "confidence": 0.8889238238334656,
+      "position": [
+        770.3913879394531,
+        359.94309997558594
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 19,
+      "time": 1.9,
+      "track_id": 17,
+      "bbox": [
+        524.0762939453125,
+        252.00885009765625,
+        736.2843017578125,
+        585.392822265625
+      ],
+      "confidence": 0.7923732399940491,
+      "position": [
+        630.1802978515625,
+        418.7008361816406
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 20,
+      "time": 2.0,
+      "track_id": 1,
+      "bbox": [
+        279.9416809082031,
+        201.93568420410156,
+        577.2086181640625,
+        594.2780151367188
+      ],
+      "confidence": 0.9487905502319336,
+      "position": [
+        428.5751495361328,
+        398.10684967041016
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 20,
+      "time": 2.0,
+      "track_id": 23,
+      "bbox": [
+        630.620361328125,
+        175.42909240722656,
+        776.4098510742188,
+        563.0366821289062
+      ],
+      "confidence": 0.8015070557594299,
+      "position": [
+        703.5151062011719,
+        369.2328872680664
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 20,
+      "time": 2.0,
+      "track_id": 25,
+      "bbox": [
+        522.4254760742188,
+        256.72210693359375,
+        671.1824951171875,
+        591.1719360351562
+      ],
+      "confidence": 0.696287989616394,
+      "position": [
+        596.8039855957031,
+        423.947021484375
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 21,
+      "time": 2.1,
+      "track_id": 1,
+      "bbox": [
+        266.7889709472656,
+        199.5865478515625,
+        565.74072265625,
+        598.3515625
+      ],
+      "confidence": 0.9633755683898926,
+      "position": [
+        416.2648468017578,
+        398.96905517578125
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 21,
+      "time": 2.1,
+      "track_id": 25,
+      "bbox": [
+        434.982666015625,
+        223.46826171875,
+        682.144287109375,
+        595.4356689453125
+      ],
+      "confidence": 0.7971086502075195,
+      "position": [
+        558.5634765625,
+        409.45196533203125
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 21,
+      "time": 2.1,
+      "track_id": 23,
+      "bbox": [
+        612.1278076171875,
+        182.17404174804688,
+        757.1983642578125,
+        563.0010986328125
+      ],
+      "confidence": 0.9411288499832153,
+      "position": [
+        684.6630859375,
+        372.5875701904297
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 21,
+      "time": 2.1,
+      "track_id": 26,
+      "bbox": [
+        -1.1356687545776367,
+        239.0171356201172,
+        77.08651733398438,
+        309.3596496582031
+      ],
+      "confidence": 0.7873727679252625,
+      "position": [
+        37.97542428970337,
+        274.18839263916016
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 22,
+      "time": 2.2,
+      "track_id": 1,
+      "bbox": [
+        255.2847900390625,
+        191.8356475830078,
+        542.837890625,
+        611.8357543945312
+      ],
+      "confidence": 0.9677314162254333,
+      "position": [
+        399.06134033203125,
+        401.83570098876953
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 22,
+      "time": 2.2,
+      "track_id": 23,
+      "bbox": [
+        594.46630859375,
+        188.5635223388672,
+        749.4647827148438,
+        574.4503173828125
+      ],
+      "confidence": 0.9260362982749939,
+      "position": [
+        671.9655456542969,
+        381.50691986083984
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 22,
+      "time": 2.2,
+      "track_id": 25,
+      "bbox": [
+        447.0279235839844,
+        233.77415466308594,
+        598.5013427734375,
+        605.1436767578125
+      ],
+      "confidence": 0.8611287474632263,
+      "position": [
+        522.7646331787109,
+        419.4589157104492
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 22,
+      "time": 2.2,
+      "track_id": 27,
+      "bbox": [
+        288.1752014160156,
+        609.928466796875,
+        402.8304443359375,
+        724.0477905273438
+      ],
+      "confidence": 0.5273424983024597,
+      "position": [
+        345.50282287597656,
+        666.9881286621094
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 23,
+      "time": 2.3,
+      "track_id": 1,
+      "bbox": [
+        261.2953186035156,
+        190.1403350830078,
+        530.007568359375,
+        624.9147338867188
+      ],
+      "confidence": 0.9634842276573181,
+      "position": [
+        395.6514434814453,
+        407.5275344848633
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 23,
+      "time": 2.3,
+      "track_id": 23,
+      "bbox": [
+        593.3740234375,
+        193.7494354248047,
+        759.0213012695312,
+        600.9066772460938
+      ],
+      "confidence": 0.9211560487747192,
+      "position": [
+        676.1976623535156,
+        397.3280563354492
+      ],
+      "jersey_number": null
+    },
+    {
+      "frame": 23,
+      "time": 2.3,
+      "track_id": 25,
+      "bbox": [
+        445.91943359375,
+        242.2858123779297,
+        610.09033203125,
+        595.2929077148438
+      ],
+      "confidence": 0.8660845160484314,
+      "position": [
+        528.0048828125,
+        418.7893600463867
+      ],
+      "jersey_number": null
+    }
+  ]
+}

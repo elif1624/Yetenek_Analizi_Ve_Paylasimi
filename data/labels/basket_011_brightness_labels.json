@@ -1,0 +1,22 @@
+{
+  "video_path": "data\\input\\clips\\basket_clips\\basket_011_brightness.mp4",
+  "video_info": {
+    "fps": 30.0,
+    "frame_count": 49,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.6333333333333333
+  },
+  "labels": [
+    {
+      "event_type": "basket",
+      "start_time": 0.0,
+      "end_time": 1.6333333333333333,
+      "start_frame": 0,
+      "end_frame": 49,
+      "confidence": 1.0,
+      "source": "clip",
+      "video_path": "data\\input\\clips\\basket_clips\\basket_011_brightness.mp4"
+    }
+  ]
+}

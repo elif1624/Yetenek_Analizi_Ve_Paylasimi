@@ -1,5 +1,21 @@
 """
-Video analizi ve model tahmini
+Video Analizi ve ML Model Tahmini Modülü
+
+Bu modül, yüklenen basketbol videolarını analiz ederek basket ve pas olaylarını
+tespit eder. analyze_video_final.py ile video analizi yapar, sonrasında ML model
+ile sliding window yöntemi kullanarak her pencere için olay sınıflandırması yapar.
+
+Ana İşlevler:
+1. Video analizi (SAM3 + tracking) - analyze_video_final.py kullanır
+2. Sliding window ile video pencerelerine bölme
+3. Her pencere için feature extraction
+4. ML model ile olay tahmini (basket/pas)
+5. Pencere tahminlerini birleştirme ve overlap temizleme
+6. Son 2 saniye mantığı: Videonun son 2 saniyesi kesinlikle basket
+
+Kullanım:
+    web/video_analyzer.py modülü web/app.py tarafından otomatik olarak kullanılır.
+    Direkt çağrılmaz, get_video_analysis_events_simple() fonksiyonu API olarak kullanılır.
 """
 
 import logging
@@ -218,7 +234,9 @@ def analyze_video_with_model(
     fps: float = 3.0,
     window_duration: float = 2.0,
     window_step: float = 0.5,
-    confidence_threshold: float = 0.6
+    confidence_threshold: float = 0.6,
+    progress_callback: Optional[callable] = None,
+    merge_distance_factor: float = 1.5
 ) -> List[Dict]:
     """
     Video analizi yap ve model ile olay tespiti
@@ -236,13 +254,21 @@ def analyze_video_with_model(
     """
     logger.info(f"Video analizi başlatılıyor: {video_path}")
     
-    # 1. Video analizi (SAM3 + tracking)
+    if progress_callback:
+        progress_callback('video_analysis', 10, "Video analizi yapılıyor (SAM3 + tracking)...")
+    
+    # 1. Video analizi (SAM3 + tracking) - Hassaslık artırılmış
     logger.info("Video analizi yapılıyor (SAM3 + tracking)...")
     analysis_result = analyze_video_final(
         video_path=video_path,
-        fps=fps,
+        text_prompt="basketball player",
+        conf_threshold=0.25,  # Daha düşük threshold (0.3 -> 0.25) = daha fazla tespit
+        fps=fps,  # fps parametresi zaten yukarıdan geliyor (6.0)
         enable_event_detection=False
     )
+    
+    if progress_callback:
+        progress_callback('model_loading', 40, "Model yükleniyor...")
     
     # 2. Model yükleme
     logger.info(f"Model yükleniyor: {model_path}")
@@ -259,6 +285,12 @@ def analyze_video_with_model(
     
     logger.info(f"Video süresi: {video_duration:.2f} saniye")
     logger.info(f"Pencere analizi başlatılıyor (pencere: {window_duration}s, adım: {window_step}s)")
+    
+    # Toplam pencere sayısını hesapla
+    total_windows = int((video_duration - window_duration) / window_step) + 1 if video_duration > window_duration else 0
+    
+    if progress_callback:
+        progress_callback('window_analysis', 50, f"Pencere analizi başlatılıyor ({total_windows} pencere)...")
     
     # 4. Sliding window ile feature extraction ve model tahmini
     detected_events = []
@@ -282,70 +314,217 @@ def analyze_video_with_model(
         
         if features:
             try:
-                # Model tahmini
+                # Model tahmini - tüm sınıf olasılıklarını al
                 predicted_class, confidence = model.predict(features)
                 
+                # Tüm sınıf olasılıklarını al (model içinden)
+                feature_vector = np.array([[features.get(col, 0) for col in model.feature_columns]])
+                feature_vector = feature_vector.astype(float)
+                feature_vector = np.nan_to_num(feature_vector, nan=0.0)
+                feature_scaled = model.scaler.transform(feature_vector)
+                all_probas = model.model.predict_proba(feature_scaled)[0]
+                
+                # Sınıf olasılıklarını dictionary'ye çevir (güvenli şekilde - model.classes sırasına göre)
+                proba_dict = {}
+                # sklearn predict_proba, model.classes_ sırasına göre olasılıkları döndürür
+                # Modelimizde classes = ["basket", "pas"], yani all_probas[0] = basket, all_probas[1] = pas
+                for i, class_name in enumerate(model.classes):
+                    if i < len(all_probas):
+                        proba_dict[class_name] = all_probas[i]
+                    else:
+                        proba_dict[class_name] = 0.0
+                
+                basket_prob = proba_dict.get('basket', 0)
+                pas_prob = proba_dict.get('pas', 0)
+                
+                # Basket genelde videonun sonunda olur - son 2 saniye kesinlikle basket
+                video_last_2_seconds_start = video_duration - 2.0  # Son 2 saniye başlangıcı
+                # Pencere başlangıcı son 2 saniyede ise basket (veya pencere orta noktası son 2 saniyede ise)
+                window_midpoint = (start_time + end_time) / 2.0
+                is_in_last_2_seconds = start_time >= video_last_2_seconds_start or window_midpoint >= video_last_2_seconds_start
+                
+                # Son 2 saniyede kesinlikle basket'e yönlendir (model ne derse desin)
+                if is_in_last_2_seconds:
+                    selected_class = 'basket'
+                    selected_confidence = max(basket_prob, 0.5)  # Minimum 0.5 confidence ver
+                    logger.info(f"Pencere {window_count}: {start_time:.2f}-{end_time:.2f}s -> SON 2 SANİYE: {selected_class} (zorla basket) (basket: {basket_prob:.3f}, pas: {pas_prob:.3f})")
+                # Son 2 saniye dışında model normal çalışır
+                else:
+                    if basket_prob > pas_prob:
+                        selected_class = 'basket'
+                        selected_confidence = basket_prob
+                        logger.info(f"Pencere {window_count}: {start_time:.2f}-{end_time:.2f}s -> MODEL TAHMİNİ: {selected_class} (basket: {basket_prob:.3f} > pas: {pas_prob:.3f})")
+                    elif pas_prob > basket_prob:
+                        selected_class = 'pas'
+                        selected_confidence = pas_prob
+                        logger.info(f"Pencere {window_count}: {start_time:.2f}-{end_time:.2f}s -> MODEL TAHMİNİ: {selected_class} (pas: {pas_prob:.3f} > basket: {basket_prob:.3f})")
+                    else:
+                        # Eşitse model tahminini kullan
+                        selected_class = predicted_class
+                        selected_confidence = confidence
+                        logger.info(f"Pencere {window_count}: {start_time:.2f}-{end_time:.2f}s -> MODEL TAHMİNİ (eşit): {selected_class} (basket: {basket_prob:.3f}, pas: {pas_prob:.3f})")
+                
                 # Yüksek güven ile tespit edilen olayları kaydet
-                if confidence >= confidence_threshold:
+                if selected_confidence >= confidence_threshold:
                     detected_events.append({
-                        'type': predicted_class,
+                        'type': selected_class,
                         'start_time': start_time,
                         'end_time': end_time,
-                        'confidence': confidence
+                        'confidence': selected_confidence
                     })
-                    logger.debug(f"Olay tespit edildi: {predicted_class} ({confidence:.2f}) @ {start_time:.2f}-{end_time:.2f}s")
+                    logger.info(f"✓ Olay tespit edildi: {selected_class} ({selected_confidence:.2f}) @ {start_time:.2f}-{end_time:.2f}s")
             
             except Exception as e:
-                logger.warning(f"Model tahmini hatası (window {window_count}): {e}")
+                logger.warning(f"Model tahmini hatası (window {window_count}): {e}", exc_info=True)
         
         current_time += window_step
+        
+        # Progress güncelleme (pencere analizi: 50% - 90%)
+        if progress_callback and total_windows > 0:
+            window_progress = 50 + int((window_count / total_windows) * 40)
+            progress_callback('window_analysis', window_progress, 
+                            f"Pencere analizi: {window_count}/{total_windows} ({len(detected_events)} olay tespit edildi)")
         
         if window_count % 50 == 0:
             logger.info(f"İşlenen pencere: {window_count}, tespit edilen olay: {len(detected_events)}")
     
     logger.info(f"Toplam {window_count} pencere analiz edildi")
     
-    # 5. Yakın olayları birleştir (non-maximum suppression benzeri)
+    if progress_callback:
+        progress_callback('merging', 90, "Olaylar birleştiriliyor...")
+    
+    # 5. Yakın olayları birleştir (sadece aynı tip olayları, çok küçük mesafe ile)
+    logger.info(f"Birleştirme öncesi {len(detected_events)} olay tespit edildi")
     if len(detected_events) > 1:
         merged_events = []
         detected_events.sort(key=lambda x: x['start_time'])
         
+        # Tüm tespit edilen olayları logla (debug için)
+        for i, evt in enumerate(detected_events):
+            logger.info(f"  Olay {i+1}: {evt['type']} @ {evt['start_time']:.2f}-{evt['end_time']:.2f}s (conf: {evt['confidence']:.2f})")
+        
         current_event = detected_events[0].copy()
+        # Birleştirme mesafesi: window_step'in merge_distance_factor katı (overlap toleransı)
+        # Daha büyük birleştirme mesafesi kullanarak daha fazla birleştirme yap
+        merge_distance = window_step * merge_distance_factor
         
         for next_event in detected_events[1:]:
-            # Eğer aynı tipte ve çok yakınsa birleştir
-            if (next_event['type'] == current_event['type'] and 
-                next_event['start_time'] - current_event['end_time'] < 1.0):
+            # SADECE aynı tipte ve ÇOK yakınsa birleştir (farklı tipler kesinlikle ayrı kalmalı)
+            time_gap = next_event['start_time'] - current_event['end_time']
+            if (next_event['type'] == current_event['type'] and time_gap < merge_distance):
+                # Aynı tip olayları birleştir (confidence'ı ortalama al)
                 current_event['end_time'] = next_event['end_time']
-                current_event['confidence'] = max(current_event['confidence'], next_event['confidence'])
+                # Confidence'ı ortalama al (daha tutarlı)
+                current_event['confidence'] = (current_event['confidence'] + next_event['confidence']) / 2.0
+                logger.info(f"Birleştirildi: {current_event['type']} @ {current_event['start_time']:.2f}-{current_event['end_time']:.2f}s (gap: {time_gap:.2f}s < {merge_distance:.2f}s)")
             else:
+                # Farklı tip veya yeterince uzaksa ayrı olay olarak ekle
                 merged_events.append(current_event)
                 current_event = next_event.copy()
         
         merged_events.append(current_event)
         detected_events = merged_events
+        logger.info(f"Birleştirme sonrası {len(detected_events)} olay kaldı")
+    else:
+        if len(detected_events) == 1:
+            logger.info(f"Tek olay: {detected_events[0]['type']} @ {detected_events[0]['start_time']:.2f}-{detected_events[0]['end_time']:.2f}s")
     
     logger.info(f"Toplam {len(detected_events)} olay tespit edildi (birleştirme sonrası)")
+    
+    # Zaman sırasına göre sırala
+    detected_events.sort(key=lambda x: x['start_time'])
+    
+    # Overlap eden olayları temizle - aynı zaman dilimi sadece bir olaya ait olmalı
+    if len(detected_events) > 1:
+        final_events = []
+        video_last_2_seconds_start = video_duration - 2.0  # Son 2 saniye başlangıcı
+        
+        for current_event in detected_events:
+            should_add = True
+            overlap_found = False
+            
+            # Önceki olaylarla overlap var mı kontrol et
+            for i, prev_event in enumerate(final_events):
+                # Overlap kontrolü: zaman dilimleri kesişiyorsa
+                if not (current_event['end_time'] <= prev_event['start_time'] or 
+                       current_event['start_time'] >= prev_event['end_time']):
+                    overlap_found = True
+                    
+                    # Overlap var - hangi olaya öncelik vereceğiz?
+                    current_window_midpoint = (current_event['start_time'] + current_event['end_time']) / 2.0
+                    prev_window_midpoint = (prev_event['start_time'] + prev_event['end_time']) / 2.0
+                    is_current_in_last_2_seconds = current_event['start_time'] >= video_last_2_seconds_start or current_window_midpoint >= video_last_2_seconds_start
+                    is_prev_in_last_2_seconds = prev_event['start_time'] >= video_last_2_seconds_start or prev_window_midpoint >= video_last_2_seconds_start
+                    
+                    # Basket son 2 saniyede ise öncelikli
+                    if current_event['type'] == 'basket' and prev_event['type'] == 'pas':
+                        if is_current_in_last_2_seconds:
+                            # Basket son 2 saniyede, pas'i kısalt
+                            prev_event['end_time'] = min(prev_event['end_time'], current_event['start_time'])
+                            should_add = True
+                        else:
+                            # Pas'i koru, basket'i ekleme
+                            should_add = False
+                    elif current_event['type'] == 'pas' and prev_event['type'] == 'basket':
+                        if is_prev_in_last_2_seconds:
+                            # Basket son 2 saniyede, pas'i ekleme
+                            should_add = False
+                        else:
+                            # Basket'i kısalt
+                            prev_event['end_time'] = min(prev_event['end_time'], current_event['start_time'])
+                            should_add = True
+                    elif current_event['type'] == prev_event['type']:
+                        # Aynı tip olaylar - birleştirme zaten yapıldı, confidence'a göre seç
+                        if current_event['confidence'] > prev_event['confidence']:
+                            # Yeni olay daha yüksek confidence, eski olayı kısalt
+                            prev_event['end_time'] = min(prev_event['end_time'], current_event['start_time'])
+                            should_add = True
+                        else:
+                            # Eski olay daha yüksek confidence, yeni olayı ekleme
+                            should_add = False
+                    else:
+                        # Farklı tip olaylar - confidence'a göre seç
+                        if current_event['confidence'] > prev_event['confidence']:
+                            prev_event['end_time'] = min(prev_event['end_time'], current_event['start_time'])
+                            should_add = True
+                        else:
+                            should_add = False
+                    
+                    if not should_add:
+                        break
+            
+            if should_add:
+                final_events.append(current_event)
+        
+        detected_events = final_events
+        logger.info(f"Overlap temizleme sonrası {len(detected_events)} olay kaldı")
     
     return detected_events
 
 
 def get_video_analysis_events_simple(
     video_path: Path,
-    model_path: Optional[Path] = None
+    model_path: Optional[Path] = None,
+    progress_callback: Optional[callable] = None
 ) -> List[Dict]:
     """
-    Video analizi yap ve model ile olay tespiti (basitleştirilmiş API)
+    Basitleştirilmiş API - Video analizi yap ve model ile olay tespiti
+    
+    Bu fonksiyon web uygulaması tarafından çağrılır. Optimize edilmiş parametreler
+    kullanır (fps=6.0, window_duration=1.5s, window_step=0.8s, confidence=0.45).
     
     Args:
         video_path: Video dosyası yolu
-        model_path: Model dosyası yolu (None ise default path kullanılır)
+        model_path: Model dosyası yolu (None ise default: event_classifier_regularized.pkl)
+        progress_callback: İlerleme callback fonksiyonu (step, progress, message)
     
     Returns:
-        Tespit edilen olaylar listesi
+        List[Dict]: Tespit edilen olaylar listesi
+                   [{'type': 'basket', 'start_time': 2.5, 'end_time': 3.0, 'confidence': 0.8}, ...]
     """
     if model_path is None:
-        model_path = project_root / 'data' / 'models' / 'event_classifier.pkl'
+        # Varsayılan olarak regularized model kullan (overfitting önlenmiş)
+        model_path = project_root / 'data' / 'models' / 'event_classifier_regularized.pkl'
     
     if not model_path.exists():
         logger.warning(f"Model bulunamadı: {model_path}, mock sonuçlar döndürülüyor")
@@ -378,14 +557,16 @@ def get_video_analysis_events_simple(
         events.sort(key=lambda x: x['start_time'])
         return events
     
-    # Gerçek model entegrasyonu
+    # Gerçek model entegrasyonu (Dengeli parametreler - gerçekçi olay tespiti için)
     return analyze_video_with_model(
         video_path=video_path,
         model_path=model_path,
-        fps=3.0,
-        window_duration=2.0,
-        window_step=0.5,
-        confidence_threshold=0.6
+        fps=6.0,  # Dengeli FPS = yeterli detay, performanslı
+        window_duration=1.5,  # Orta pencere = olayları daha iyi kapsar
+        window_step=0.8,  # Daha büyük adım = daha az pencere, daha az olay
+        confidence_threshold=0.45,  # Daha yüksek threshold = daha az false positive
+        progress_callback=progress_callback,
+        merge_distance_factor=2.0  # Daha büyük birleştirme mesafesi = daha fazla birleştirme
     )
 
 

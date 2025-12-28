@@ -1,6 +1,26 @@
 """
-ML model eğitim scripti
-Feature'ları kullanarak basket ve pas olaylarını sınıflandıran model eğitir
+ML Model Eğitim Scripti
+
+Bu script, manuel olarak etiketlenmiş video klip örneklerinden çıkarılan
+feature'ları kullanarak basket ve pas olaylarını sınıflandıran ML modelini eğitir.
+
+Eğitim Süreci:
+1. Feature JSON dosyasını yükler (extract_features.py ile oluşturulmuş)
+2. Train/test split yapar (%80 train, %20 test)
+3. Feature'ları normalize eder (StandardScaler)
+4. Gradient Boosting Classifier ile model eğitir
+5. Test set üzerinde metrikleri hesaplar (accuracy, precision, recall, F1)
+6. Eğitilmiş modeli pickle formatında kaydeder
+
+Kullanım:
+    # Varsayılan parametrelerle
+    python tools/train_model.py
+    
+    # Özel feature dosyası ile
+    python tools/train_model.py --features data/dataset/features_augmented.json
+    
+    # Regularized model için (overfitting önleme)
+    python tools/train_model_regularized.py
 """
 
 import argparse

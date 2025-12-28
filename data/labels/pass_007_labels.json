@@ -1,0 +1,22 @@
+{
+  "video_path": "data\\input\\clips\\pass_clips\\pass_007.mp4",
+  "video_info": {
+    "fps": 29.97,
+    "frame_count": 58,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.9352686019352687
+  },
+  "labels": [
+    {
+      "event_type": "pas",
+      "start_time": 0.0,
+      "end_time": 1.9352686019352687,
+      "start_frame": 0,
+      "end_frame": 58,
+      "confidence": 1.0,
+      "source": "clip",
+      "video_path": "data\\input\\clips\\pass_clips\\pass_007.mp4"
+    }
+  ]
+}

@@ -64,9 +64,11 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 ### 1. Access Token Kullanımı
 
-Facebook Graph API için bir access token gerekir. Access token `web/facebook_uploader.py` dosyasında varsayılan olarak tanımlıdır.
+Facebook Graph API için Page Access Token kullanılır. Token `web/facebook_uploader.py` dosyasında tanımlıdır.
 
-**Not:** Mevcut access token kodda tanımlıdır. Token süresi dolduğunda yeni bir token almanız gerekebilir.
+**Önemli:** Page Access Token kullanılıyor (User Access Token yerine). Bu, videoların bir Facebook Page'e yüklenmesini sağlar ve daha uzun süreli geçerliliğe sahiptir.
+
+**Not:** Token süresi dolduğunda yeni bir Page Access Token almanız gerekebilir.
 
 ### 2. Facebook Developer Console (ÖNEMLİ - Token İzni İçin)
 
@@ -84,14 +86,22 @@ Bu hata, access token'ınızın video yayınlama izni (`publish_video`) olmadı�
 5. **Generate Access Token** butonuna tıklayın
 6. Facebook'tan izin verin
 7. Oluşturulan token'ı kopyalayın
-8. Token'ı `web/facebook_uploader.py` dosyasındaki `FACEBOOK_ACCESS_TOKEN` değişkenine ekleyin
+8. Token'ı `web/facebook_uploader.py` dosyasındaki `PAGE_ACCESS_TOKEN` değişkenine ekleyin
+9. Page ID'yi `PAGE_ID` değişkenine ekleyin (veya 'me' olarak bırakın)
 
 **NOT:** `publish_video` permission'ı genellikle Facebook tarafından manuel olarak onaylanması gerekebilir. Eğer token oluştururken bu permission görünmüyorsa, Facebook Developer Console'da uygulamanızın ayarlarından bu permission'ı talep etmeniz gerekebilir.
 
-**Alternatif:** Eğer bir Facebook Page'iniz varsa, Page Access Token kullanmak daha kolay olabilir:
+**Önerilen Yöntem - Page Access Token:** 
+Uygulama varsayılan olarak Page Access Token kullanır (User Access Token yerine):
 1. [Page Access Token Tool](https://developers.facebook.com/tools/accesstoken/) sayfasına gidin
 2. Page'inizi seçin
-3. Token'ı kopyalayın ve `page_id` parametresini de belirtin
+3. Token'ı kopyalayın ve `web/facebook_uploader.py` dosyasındaki `PAGE_ACCESS_TOKEN` değişkenine ekleyin
+4. Page ID'yi `PAGE_ID` değişkenine ekleyin (veya 'me' olarak bırakın)
+
+Page Access Token'ın avantajları:
+- Daha uzun süreli geçerlilik
+- Video yayınlama izni genellikle otomatik olarak dahildir
+- Videolar direkt olarak Page'e yüklenir
 
 ### 3. Page ID (Opsiyonel)
 

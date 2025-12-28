@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ### 2. Video Analizi
 ```bash
-python analyze_video_final.py
+python analyze_video_final.py --video data/input/video.mp4 --fps 5.0
 ```
 
 ### 3. Manuel Etiketleme
@@ -43,12 +43,30 @@ python tools/labeling_tool_improved.py data/input/video.mp4
 
 ## 🎯 Özellikler
 
+### Video Analizi
 - ✅ SAM3 ile oyuncu ve top tespiti
 - ✅ Gelişmiş tracking (aynı oyuncu = aynı ID)
-- ✅ Olay tespiti (basket, pas)
+- ✅ Kalman filter tabanlı takip sistemi
+- ✅ Top pozisyonu tespiti
+
+### ML Model
+- ✅ Gradient Boosting Classifier ile olay sınıflandırması (basket, pas)
+- ✅ Feature extraction (30+ özellik)
+- ✅ Model eğitimi ve değerlendirme araçları
+- ✅ Overfitting önleme (regularized model)
+
+### Web Uygulaması
+- ✅ Web arayüzü ile video yükleme
+- ✅ Otomatik olay tespiti (ML model)
+- ✅ Video kırpma (clipping)
+- ✅ YouTube/Facebook paylaşımı
+- ✅ Analiz sonuçlarını cache'leme
+
+### Araçlar
 - ✅ Manuel etiketleme aracı
-- ✅ Model doğruluk metrikleri
+- ✅ Model doğruluk metrikleri ve grafikler
 - ✅ Olay görselleştirme
+- ✅ Dataset yönetimi
 
 ## 📊 Kullanım
 
@@ -67,24 +85,59 @@ python tools/labeling_tool_improved.py data/input/video.mp4
 python tools/test_model.py --video data/input/video.mp4 --labels data/labels/video_labels.json
 ```
 
+### Model Eğitimi
+```bash
+# Normal model
+python tools/train_model.py
+
+# Regularized model (overfitting önleme - önerilen)
+python tools/train_model_regularized.py
+```
+
 ## 📝 Etiketleme Rehberi
 
-Detaylı kullanım için: `ETIKETLEME_REHBERI.md`
+Detaylı kullanım için: `ETIKETLEME_KILAVUZU.txt`
 
 ## 🔧 Yapılandırma
 
+### Environment Variables (Opsiyonel)
+
 `.env` dosyası oluştur:
-```
+```env
 HUGGINGFACE_API_TOKEN=your_token
 HUGGINGFACE_MODEL_NAME=facebook/sam3
 FRAME_EXTRACTION_FPS=3.0
 OUTPUT_DIR=data/output
 RESULTS_DIR=data/results
 LOG_LEVEL=INFO
+SECRET_KEY=your-secret-key  # Web uygulaması için
 ```
 
-## 📈 Sonraki Adımlar
+**Not:** Çoğu ayar varsayılan değerlerle çalışır. Sadece SAM3 modeli için Hugging Face token'ı gerekebilir.
 
-1. Manuel etiketleme ile veri toplama (50-100 video)
-2. Otomatik model entegrasyonu (VideoMAE/EITNet)
-3. Custom model eğitimi (100+ veri ile)
+## 🌐 Web Uygulaması
+
+Web arayüzü ile video analizi, kırpma ve sosyal medya paylaşımı:
+
+```bash
+cd web
+python app.py
+```
+
+Tarayıcıda açın: http://localhost:5000
+
+Detaylı bilgi için: `web/README.md`
+
+## 🤖 ML Model
+
+Model eğitimi ve kullanımı:
+
+```bash
+# Model eğitimi
+python tools/train_model.py
+
+# Regularized model (overfitting önleme)
+python tools/train_model_regularized.py
+```
+
+Eğitilmiş model: `data/models/event_classifier_regularized.pkl`

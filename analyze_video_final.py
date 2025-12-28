@@ -1,6 +1,19 @@
 """
-Final video analizi - Geliştirilmiş tracking ile
-Aynı oyuncu aynı ID'ye sahip olacak şekilde optimize edildi
+Ana Video Analiz Modülü - Basketbol Video Analizi
+
+Bu modül, basketbol videolarını analiz ederek oyuncu tespiti, takibi ve özellik çıkarımı yapar.
+SAM3 (Segment Anything Model 3) kullanarak oyuncuları tespit eder ve Kalman filter tabanlı
+tracking sistemi ile aynı oyuncuya aynı ID'yi atar.
+
+Ana İşlevler:
+- Oyuncu tespiti (SAM3 ile text prompt tabanlı)
+- Oyuncu takibi (Kalman filter + IoU matching)
+- Top tespiti (ML model için feature extraction)
+- Forma numarası tanıma (isteğe bağlı)
+- Analiz sonuçlarını JSON ve CSV formatında kaydetme
+
+Kullanım:
+    python analyze_video_final.py --video data/input/video.mp4 --fps 5.0
 """
 
 import logging
@@ -33,15 +46,27 @@ def analyze_video_final(
     enable_event_detection: bool = False  # Rule-based kaldırıldı, sadece manuel etiketleme
 ) -> Dict[str, Any]:
     """
-    Final video analizi - Geliştirilmiş tracking ile
+    Ana video analiz fonksiyonu - Basketbol videolarını analiz eder
+    
+    Bu fonksiyon videodaki her frame'i işleyerek:
+    1. SAM3 ile oyuncuları tespit eder (text prompt: "basketball player")
+    2. Kalman filter tabanlı tracking ile aynı oyuncuya aynı ID'yi atar
+    3. Top pozisyonunu tespit eder (ML model için feature extraction için)
+    4. İsteğe bağlı olarak forma numarası tanır
+    
+    Analiz sonuçları JSON ve CSV formatında kaydedilir.
     
     Args:
-        video_path: Video dosyası yolu
-        text_prompt: SAM3 text prompt
-        conf_threshold: Confidence threshold
-        fps: Frame extraction FPS
-        max_frames: Maksimum frame sayısı
-        enable_jersey_recognition: Numara tanıma aktif mi
+        video_path: Analiz edilecek video dosyasının yolu
+        text_prompt: SAM3 için text prompt (varsayılan: "basketball player")
+        conf_threshold: Tespit güven eşiği (0.0-1.0 arası, düşük değer = daha fazla tespit)
+        fps: Saniyede kaç frame analiz edileceği (performans için düşük değerler kullanılabilir)
+        max_frames: Maksimum frame sayısı (None ise tüm video analiz edilir, test için kullanılır)
+        enable_jersey_recognition: Forma numarası tanıma aktif olsun mu (OCR ile, yavaş)
+        enable_event_detection: Rule-based olay tespiti (kullanılmıyor, ML model kullanılıyor)
+    
+    Returns:
+        Dict: Analiz sonuçları içeren dictionary (metadata, frame_results, track_statistics, vb.)
     """
     logger.info("="*60)
     logger.info("FINAL VIDEO ANALİZİ - GELİŞTİRİLMİŞ TRACKING")
@@ -51,7 +76,8 @@ def analyze_video_final(
     logger.info(f"Tracking: Aktif (aynı oyuncu = aynı ID)")
     logger.info("Olay Tespiti: Kapalı (Sadece manuel etiketleme kullanılacak)")
     
-    # Video processor
+    # ========== 1. Video Yükleme ve Metadata ==========
+    # Video dosyasını yükler ve temel bilgileri (süre, çözünürlük, FPS) alır
     processor = VideoProcessor(video_path, fps=fps)
     metadata = processor.video_loader.get_metadata()
     
@@ -59,29 +85,37 @@ def analyze_video_final(
     logger.info(f"  Süre: {metadata['duration']:.2f} saniye")
     logger.info(f"  Çözünürlük: {metadata['width']}x{metadata['height']}")
     
-    # Detector (sadece basketbol oyuncuları)
+    # ========== 2. Oyuncu Tespiti (SAM3) ==========
+    # SAM3 modelini kullanarak videodaki basketbol oyuncularını tespit eder
+    # Text prompt ile sadece "basketball player" objelerini bulur
     logger.info("\nSAM3 model yükleniyor...")
     detector = PlayerDetector(
         sam3_model=None,
         text_prompt=text_prompt,  # "basketball player" - sadece oyuncular
         conf_threshold=conf_threshold,
-        use_local=True
+        use_local=True  # Yerel SAM3 modeli kullan
     )
     logger.info("Oyuncu Detector hazır!")
     
-    # Top Detector (ML model için feature extraction'da kullanılacak)
-    ball_detector = BallDetector(sam3_model=detector.sam3_model, conf_threshold=0.4)
-    logger.info("Top Detector hazır! (ML model için feature extraction)")
+    # ========== 3. Top Tespiti ==========
+    # Top pozisyonunu tespit eder (ML model için feature extraction'da kullanılır)
+    # Aynı SAM3 modelini paylaşarak performans optimizasyonu yapar
+    ball_detector = BallDetector(sam3_model=detector.sam3_model, conf_threshold=0.3)
+    logger.info("Top Detector hazır! (ML model için feature extraction) - Threshold: 0.3")
     
-    # Geliştirilmiş Tracker (optimize edilmiş parametreler)
+    # ========== 4. Oyuncu Takibi (Tracking) ==========
+    # Kalman filter tabanlı tracking sistemi - Aynı oyuncuya aynı ID'yi atar
+    # IoU (Intersection over Union) matching ile oyuncuları frame'ler arasında eşleştirir
     tracker = PlayerTracker(
-        iou_threshold=0.4,  # Daha yüksek threshold (daha az yeni track)
-        max_disappeared=20,  # Daha uzun süre beklet
+        iou_threshold=0.4,  # Daha yüksek threshold = daha az yeni track oluşturur (stabilite için)
+        max_disappeared=20,  # Oyuncu 20 frame boyunca görünmese bile track'i koru
         frame_rate=metadata['fps']
     )
     logger.info("Geliştirilmiş Tracker hazır! (Kalman filter + improved matching)")
     
-    # Jersey recognizer
+    # ========== 5. Forma Numarası Tanıma (İsteğe Bağlı) ==========
+    # OCR (Optical Character Recognition) ile oyuncu forma numaralarını tanır
+    # Yavaş olduğu için varsayılan olarak kapalı, gerekirse açılabilir
     jersey_recognizer = None
     if enable_jersey_recognition:
         try:
@@ -91,11 +125,12 @@ def analyze_video_final(
             logger.warning(f"Jersey recognizer başlatılamadı: {e}")
             enable_jersey_recognition = False
     
-    # Analiz
-    all_tracked_players = []
-    frame_results = []
-    total_detections = 0
-    ball_positions_by_frame = {}  # frame_num -> (x, y) veya None
+    # ========== 6. Frame İşleme Döngüsü ==========
+    # Her frame için: detection -> tracking -> top tespiti -> sonuç kaydetme
+    all_tracked_players = []  # Tüm frame'lerdeki takip edilen oyuncular
+    frame_results = []  # Her frame için analiz sonuçları
+    total_detections = 0  # Toplam tespit sayısı (istatistik için)
+    ball_positions_by_frame = {}  # frame_num -> (x, y) veya None (top pozisyonları)
     
     logger.info("\nFrame işleme başlıyor...")
     logger.info("-"*60)
@@ -108,18 +143,19 @@ def analyze_video_final(
         try:
             frame_time = frame_num / fps
             
-            # Detection (oyuncular)
+            # 6.1. Oyuncu Tespiti: SAM3 ile frame'deki oyuncuları bul
             detections = detector.detect(frame)
             total_detections += len(detections)
             
-            # Tracking (geliştirilmiş)
+            # 6.2. Oyuncu Takibi: Tespit edilen oyuncuları önceki frame'lerdeki oyuncularla eşleştir
+            # Kalman filter ile pozisyon tahmini yapar ve IoU ile eşleştirme yapar
             tracked_players = tracker.update(detections, frame, frame_num)
             
-            # Top tespiti (ML model için feature extraction) - Her 5 frame'de bir (performans optimizasyonu)
+            # 6.3. Top Tespiti: ML model için feature extraction için top pozisyonunu bul
+            # Performans optimizasyonu: Her 5 frame'de bir tespit yap, diğerlerinde interpolasyon kullan
             ball_position = None
             if ball_detector:
-                # Her 5 frame'de bir top tespiti yap, diğer frame'ler için interpolasyon kullan
-                ball_detection_interval = 5
+                ball_detection_interval = 5  # Her 5 frame'de bir top tespiti yap
                 if frame_num % ball_detection_interval == 0:
                     try:
                         ball_position = ball_detector.get_ball_position(frame)
@@ -128,20 +164,21 @@ def analyze_video_final(
                         logger.debug(f"Frame {frame_num}: Top tespiti hatası: {e}")
                         ball_positions_by_frame[frame_num] = None
                 else:
-                    # Son tespit edilen pozisyonu kullan (basit interpolasyon)
+                    # Son tespit edilen pozisyonu kullan (basit interpolasyon - performans için)
                     last_detected_frame = (frame_num // ball_detection_interval) * ball_detection_interval
                     ball_position = ball_positions_by_frame.get(last_detected_frame)
                     ball_positions_by_frame[frame_num] = ball_position
             
-            # Numara tanıma
+            # 6.4. Forma Numarası Tanıma: Her 30 frame'de bir OCR ile forma numarasını tanı
+            # Yavaş olduğu için sadece belirli frame'lerde çalıştırılır
             if enable_jersey_recognition and jersey_recognizer and frame_num % 30 == 0:
                 for player in tracked_players:
-                    if player.jersey_number is None:
+                    if player.jersey_number is None:  # Henüz numara tanınmadıysa
                         jersey_num = jersey_recognizer.recognize_number(frame, player.bbox)
                         if jersey_num:
                             tracker.assign_jersey_number(player.track_id, jersey_num)
             
-            # Frame sonuçları
+            # 6.5. Frame Sonuçlarını Kaydet: Her frame için tespit edilen oyuncuları ve top pozisyonunu kaydet
             frame_result = {
                 'frame_number': frame_num,
                 'time_seconds': frame_time,
@@ -180,7 +217,9 @@ def analyze_video_final(
             logger.error(f"Frame {frame_num} hatası: {e}")
             continue
     
-    # Event detection kaldırıldı - sadece manuel etiketleme kullanılacak
+    # ========== 7. Olay Tespiti ==========
+    # Rule-based olay tespiti kaldırıldı - ML model kullanılıyor
+    # Manuel etiketleme ile training verisi oluşturulur, ML model ile tahmin yapılır
     detected_events = []
     logger.info("Olay tespiti: Manuel etiketleme ile yapılacak")
     
@@ -188,15 +227,16 @@ def analyze_video_final(
     logger.info("ANALİZ TAMAMLANDI")
     logger.info("="*60)
     
-    # Track istatistikleri
+    # ========== 8. İstatistik Hesaplama ==========
+    # Her track için istatistikler hesaplanır (track uzunluğu, süre, forma numarası vb.)
     track_stats = {}
     for track_id in tracker.get_active_tracks():
         trajectory = tracker.get_player_trajectory(track_id)
         if trajectory:
             track_stats[track_id] = {
-                'total_frames': len(trajectory),
-                'first_frame': trajectory[0].frame_number,
-                'last_frame': trajectory[-1].frame_number,
+                'total_frames': len(trajectory),  # Bu track'te kaç frame göründü
+                'first_frame': trajectory[0].frame_number,  # İlk göründüğü frame
+                'last_frame': trajectory[-1].frame_number,  # Son göründüğü frame
                 'duration_frames': trajectory[-1].frame_number - trajectory[0].frame_number,
                 'duration_seconds': (trajectory[-1].frame_number - trajectory[0].frame_number) / fps,
                 'jersey_number': trajectory[0].jersey_number if trajectory[0].jersey_number else None
@@ -223,7 +263,8 @@ def analyze_video_final(
                        f"Frame {event.frame_start}-{event.frame_end}, "
                        f"Confidence: {event.confidence:.2f}")
     
-    # Sonuçlar
+    # ========== 9. Sonuçları Derleme ==========
+    # Tüm analiz sonuçlarını bir dictionary'de topla (JSON kaydetme için)
     results = {
         'video_path': str(video_path),
         'video_metadata': metadata,
@@ -262,14 +303,15 @@ def analyze_video_final(
         'all_tracked_players': all_tracked_players
     }
     
-    # Kaydet
+    # ========== 10. Sonuçları Kaydetme ==========
+    # JSON formatında detaylı analiz sonuçlarını kaydet (ML model için feature extraction'da kullanılır)
     results_path = settings.results_dir / f"{video_path.stem}_final_analysis.json"
     with open(results_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
     logger.info(f"\nSonuçlar kaydedildi: {results_path}")
     
-    # CSV
+    # CSV formatında oyuncu pozisyonlarını kaydet (Excel'de analiz için)
     import pandas as pd
     if all_tracked_players:
         df = pd.DataFrame(all_tracked_players)
@@ -306,7 +348,21 @@ def create_final_visualization(
     results: Dict[str, Any],
     output_path: Path = None
 ):
-    """Görselleştirme oluştur"""
+    """
+    Analiz sonuçlarını görselleştiren video oluşturur
+    
+    Görselleştirmede:
+    - Her oyuncu için bounding box ve track ID gösterilir
+    - Farklı oyuncular için farklı renkler kullanılır
+    - Forma numarası varsa gösterilir
+    - Top pozisyonu sarı daire ile gösterilir
+    - Olaylar (basket, pas) üstte metin olarak gösterilir
+    
+    Args:
+        video_path: Orijinal video dosyası
+        results: analyze_video_final() fonksiyonundan dönen sonuçlar
+        output_path: Çıktı video dosyası yolu (None ise otomatik oluşturulur)
+    """
     if output_path is None:
         output_path = settings.output_dir / f"{video_path.stem}_final_tracked.mp4"
     
@@ -409,7 +465,19 @@ def create_final_visualization(
 
 
 def main():
-    """Ana fonksiyon"""
+    """
+    Komut satırı arayüzü - Video analizini başlatır
+    
+    Kullanım örnekleri:
+        # Varsayılan video ile
+        python analyze_video_final.py
+        
+        # Özel video ile
+        python analyze_video_final.py --video data/input/my_video.mp4
+        
+        # Düşük FPS ile (daha hızlı)
+        python analyze_video_final.py --fps 3.0
+    """
     import argparse
     
     parser = argparse.ArgumentParser(description="Final video analizi")

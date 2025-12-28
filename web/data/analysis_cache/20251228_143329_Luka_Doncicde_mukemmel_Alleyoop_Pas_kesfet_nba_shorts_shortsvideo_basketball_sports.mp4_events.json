@@ -1,0 +1,24 @@
+{
+  "filename": "20251228_143329_Luka_Doncicde_mukemmel_Alleyoop_Pas_kesfet_nba_shorts_shortsvideo_basketball_sports.mp4",
+  "timestamp": "2025-12-28T14:43:56.360244",
+  "events": [
+    {
+      "type": "basket",
+      "start_time": 0.0,
+      "end_time": 1.6,
+      "confidence": 0.556832327684744
+    },
+    {
+      "type": "pas",
+      "start_time": 1.6,
+      "end_time": 2.4000000000000004,
+      "confidence": 0.7548337861524156
+    },
+    {
+      "type": "basket",
+      "start_time": 2.4000000000000004,
+      "end_time": 5.5,
+      "confidence": 0.5735257838010264
+    }
+  ]
+}

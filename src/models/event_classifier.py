@@ -1,6 +1,29 @@
 """
-Basketbol olay sınıflandırıcı model
-Feature'ları kullanarak basket ve pas olaylarını sınıflandırır
+Basketbol Olay Sınıflandırıcı Model
+
+Bu modül, basketbol videolarından çıkarılan feature'ları kullanarak
+basket ve pas olaylarını sınıflandıran ML modelini içerir.
+
+Model Tipi:
+- Gradient Boosting Classifier (varsayılan ve önerilen)
+- Random Forest Classifier (alternatif)
+
+Feature'lar:
+- Oyuncu pozisyonları (ortalama, std, min, max)
+- Top pozisyonu ve hareketi
+- Oyuncu-top mesafeleri
+- Hareket hızları ve yönleri
+- Ve daha fazlası (30+ feature)
+
+Eğitim:
+    python tools/train_model.py --features data/dataset/features.json
+
+Kullanım:
+    # Model yükleme
+    classifier = EventClassifier.load('data/models/event_classifier.pkl')
+    
+    # Tahmin
+    prediction, confidence = classifier.predict(features_dict)
 """
 
 import json

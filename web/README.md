@@ -42,16 +42,19 @@ Tarayıcıda açın: http://localhost:5000
 - ✅ Video kırpma
 - ✅ Kırpılmış videoları görüntüleme
 - ✅ Video indirme
-- 🔄 YouTube paylaşımı (yakında)
-- 🔄 Instagram paylaşımı (yakında)
+- ✅ YouTube paylaşımı
+- ✅ Facebook paylaşımı
 
 ## 🔧 Yapılandırma
 
-Environment variables (`.env` dosyası):
+Model dosyası otomatik olarak `data/models/event_classifier_regularized.pkl` kullanılır.
+
+Environment variables (opsiyonel, `.env` dosyası):
 ```env
 SECRET_KEY=your-secret-key
-MODEL_PATH=data/models/event_classifier.pkl
 ```
+
+Sosyal medya API kurulumu için: `web/SOCIAL_MEDIA_SETUP.md`
 
 ## 📝 Kullanım
 
@@ -64,22 +67,21 @@ MODEL_PATH=data/models/event_classifier.pkl
 
 ## 🐛 Bilinen Sorunlar
 
-- Model entegrasyonu henüz tamamlanmadı (mock sonuçlar kullanılıyor)
-- YouTube/Instagram API entegrasyonu yakında eklenecek
 - Video kırpma işlemi zaman alabilir (büyük videolar için)
 
 ## 🚧 Geliştirme Durumu
 
 - [x] Temel Flask uygulaması
-- [x] Video yükleme
+- [x] Video yükleme (drag & drop)
 - [x] Video önizleme
-- [x] Analiz sayfası
-- [x] Video kırpma modülü
-- [ ] Model entegrasyonu (tam)
-- [ ] YouTube API
-- [ ] Instagram API
-- [ ] Background job processing
-- [ ] İlerleme takibi (WebSocket)
+- [x] Analiz sayfası (real-time progress)
+- [x] Video kırpma modülü (tekil ve toplu)
+- [x] Model entegrasyonu (tam - event_classifier_regularized.pkl)
+- [x] YouTube API entegrasyonu
+- [x] Facebook API entegrasyonu (Page Access Token)
+- [x] Background job processing (threading)
+- [x] İlerleme takibi (polling ile JSON dosyası)
+- [x] Analiz sonuçlarını cache'leme
 
 
 

@@ -1,0 +1,22 @@
+{
+  "video_path": "data\\input\\clips\\basket_clips\\basket_013_rotate.mp4",
+  "video_info": {
+    "fps": 30.0,
+    "frame_count": 57,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.9
+  },
+  "labels": [
+    {
+      "event_type": "basket",
+      "start_time": 0.0,
+      "end_time": 1.9,
+      "start_frame": 0,
+      "end_frame": 57,
+      "confidence": 1.0,
+      "source": "clip",
+      "video_path": "data\\input\\clips\\basket_clips\\basket_013_rotate.mp4"
+    }
+  ]
+}

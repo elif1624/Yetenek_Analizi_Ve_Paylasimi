@@ -1,0 +1,22 @@
+{
+  "video_path": "data\\input\\clips\\pass_clips\\pass_013_brightness.mp4",
+  "video_info": {
+    "fps": 29.0,
+    "frame_count": 34,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.1724137931034482
+  },
+  "labels": [
+    {
+      "event_type": "pas",
+      "start_time": 0.0,
+      "end_time": 1.1724137931034482,
+      "start_frame": 0,
+      "end_frame": 34,
+      "confidence": 1.0,
+      "source": "clip",
+      "video_path": "data\\input\\clips\\pass_clips\\pass_013_brightness.mp4"
+    }
+  ]
+}

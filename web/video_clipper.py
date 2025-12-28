@@ -16,7 +16,7 @@ def clip_video(
     start_time: float,
     end_time: float,
     output_path: Path,
-    buffer: float = 0.5
+    buffer: float = 0.1  # Daha hassas kırpma için buffer azaltıldı (0.5 -> 0.1)
 ) -> Path:
     """
     Video'dan belirli bir zaman aralığını kırp (OpenCV kullanarak)
@@ -50,13 +50,13 @@ def clip_video(
         
         logger.info(f"Video özellikleri: {width}x{height}, {fps:.2f} FPS, {video_duration:.2f} saniye")
         
-        # Buffer ekle
+        # Buffer ekle (hassas kırpma için daha küçük buffer)
         start_with_buffer = max(0, start_time - buffer)
         end_with_buffer = min(video_duration, end_time + buffer)
         
-        # Frame numaralarını hesapla
-        start_frame = int(start_with_buffer * fps)
-        end_frame = int(end_with_buffer * fps)
+        # Frame numaralarını hesapla (daha hassas frame pozisyonlama için yuvarlama)
+        start_frame = int(round(start_with_buffer * fps))  # round() ile daha hassas
+        end_frame = int(round(end_with_buffer * fps))  # round() ile daha hassas
         
         logger.info(f"Kırpılacak frame aralığı: {start_frame} - {end_frame} (toplam {end_frame - start_frame} frame)")
         

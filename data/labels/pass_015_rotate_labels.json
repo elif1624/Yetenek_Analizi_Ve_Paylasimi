@@ -1,0 +1,22 @@
+{
+  "video_path": "data\\input\\clips\\pass_clips\\pass_015_rotate.mp4",
+  "video_info": {
+    "fps": 29.0,
+    "frame_count": 42,
+    "width": 1280,
+    "height": 720,
+    "duration": 1.4482758620689655
+  },
+  "labels": [
+    {
+      "event_type": "pas",
+      "start_time": 0.0,
+      "end_time": 1.4482758620689655,
+      "start_frame": 0,
+      "end_frame": 42,
+      "confidence": 1.0,
+      "source": "clip",
+      "video_path": "data\\input\\clips\\pass_clips\\pass_015_rotate.mp4"
+    }
+  ]
+}
